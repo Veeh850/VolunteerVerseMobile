@@ -14,6 +14,11 @@ namespace VolunteerVerseMobile.Models
             Errors = new List<string>() { message };
         }
 
+        public ErrorResponseDTO()
+        {
+            Errors = new List<string>();
+        }
+
         [JsonPropertyName("errors")]
         public List<string> Errors { get; set; }
     }

@@ -13,7 +13,7 @@
                 <CollectionView ItemsSource="{Binding EventPreviews}" SelectionMode="None">
 
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" />
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>

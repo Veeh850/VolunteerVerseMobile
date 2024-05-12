@@ -11,5 +11,7 @@ namespace VolunteerVerseMobile.Utils
         public const string BaseUrl = "https://volunteer-verse.azurewebsites.net/api";
 
         public readonly static string EventListUrl = $"{BaseUrl}/events";
+
+        public readonly static string LoginUrl = $"{BaseUrl}/accounts/login";
     }
 }

@@ -7,6 +7,8 @@ namespace VolunteerVerseMobile
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute(nameof(EventListPage), typeof(EventListPage));
         }
     }
 }

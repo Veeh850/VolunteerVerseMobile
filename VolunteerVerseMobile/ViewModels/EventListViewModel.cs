@@ -28,7 +28,7 @@ namespace VolunteerVerseMobile.ViewModels
         }
 
         [RelayCommand]
-        public async Task LoadEventListAsync()
+        public async Task LoadEventList()
         {
             if (_connectivity.NetworkAccess != NetworkAccess.Internet)
             {
@@ -71,7 +71,7 @@ namespace VolunteerVerseMobile.ViewModels
 
         public override async Task OnAppearing()
         {
-            await LoadEventListAsync();
+            await LoadEventList();
         }
     }
 }

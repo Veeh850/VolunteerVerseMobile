@@ -10,7 +10,7 @@
     <ShellContent
         Shell.NavBarIsVisible="true"
         Title="VolunteerVerseMobile"
-        ContentTemplate="{DataTemplate views:EventListPage}"
-        Route="EventListPage"/>
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage"/>
 
 </Shell>

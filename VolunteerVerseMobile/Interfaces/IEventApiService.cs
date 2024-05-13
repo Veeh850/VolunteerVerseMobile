@@ -9,6 +9,8 @@ namespace VolunteerVerseMobile.Interfaces
 {
     public interface IEventApiService
     {
-        public Task<List<EventPreview>> GetAllEventPreviews();
+        public Task<List<EventPreview>> GetAllEventPreviews(EventFilter? eventFilter = null);
+
+        public Task<EventDetails> GetEventDetailsById(int id);
     }
 }

@@ -28,9 +28,11 @@ namespace VolunteerVerseMobile
 
             builder.Services.AddTransient<EventListViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<EventDetailsViewModel>();
 
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<EventListPage>();
+            builder.Services.AddTransient<EventDetailsPage>();
 
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
 

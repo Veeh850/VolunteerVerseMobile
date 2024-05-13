@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Networking;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VolunteerVerseMobile.Interfaces;
 using VolunteerVerseMobile.Models;
+using VolunteerVerseMobile.Views;
 
 namespace VolunteerVerseMobile.ViewModels
 {
@@ -19,6 +21,9 @@ namespace VolunteerVerseMobile.ViewModels
         private readonly IEventApiService _eventApiService;
 
         private IConnectivity _connectivity;
+
+        [ObservableProperty]
+        private string _searchtext;
 
         public EventListViewModel(IEventApiService eventApiService, IConnectivity connectivity)
         {
@@ -46,7 +51,7 @@ namespace VolunteerVerseMobile.ViewModels
             {
                 IsBusy = true;
 
-                var eventPreviews = await _eventApiService.GetAllEventPreviews();
+                var eventPreviews = await _eventApiService.GetAllEventPreviews(new EventFilter(Searchtext));
 
                 if(EventPreviews.Count != 0)
                 {
@@ -67,6 +72,15 @@ namespace VolunteerVerseMobile.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        public async Task GoToDetails(int id)
+        {
+            await Shell.Current.GoToAsync(nameof(EventDetailsPage), true, new Dictionary<string, object>
+            {
+                {"eventId" , id}
+            });
         }
 
         public override async Task OnAppearing()

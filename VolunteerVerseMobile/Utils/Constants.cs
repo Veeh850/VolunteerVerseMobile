@@ -13,5 +13,7 @@ namespace VolunteerVerseMobile.Utils
         public readonly static string EventListUrl = $"{BaseUrl}/events";
 
         public readonly static string LoginUrl = $"{BaseUrl}/accounts/login";
+
+        public readonly static string AccountDetailsUrl = $"{BaseUrl}/profiles/own";
     }
 }

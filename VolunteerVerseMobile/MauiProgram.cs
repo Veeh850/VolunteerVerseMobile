@@ -29,14 +29,17 @@ namespace VolunteerVerseMobile
 
             builder.Services.AddTransient<IEventApiService, EventApiService>();
             builder.Services.AddTransient<IAuthorizationApiService, AuthorizationApiService>();
+            builder.Services.AddTransient<IAccountApiService, AccountApiService>();
 
             builder.Services.AddTransient<EventListViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<EventDetailsViewModel>();
+            builder.Services.AddTransient<ProfileViewModel>();
 
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<EventListPage>();
             builder.Services.AddTransient<EventDetailsPage>();
+            builder.Services.AddTransient<ProfilePage>();
 
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
 

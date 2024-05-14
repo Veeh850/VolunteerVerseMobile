@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VolunteerVerseMobile.Views.LoginPage"
              xmlns:viewmodel ="clr-namespace:VolunteerVerseMobile.ViewModels"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              x:DataType="viewmodel:LoginViewModel"
              Title="LoginPage">
 
-    <Grid Padding="20">
+    <Grid Padding="20, 30, 20, 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -14,15 +16,31 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Text="Email:" Grid.Row="0"/>
+        <!--<Label Text="Email:" Grid.Row="0"/>
         <Entry x:Name="EmailEntry" Placeholder="Email Address" Grid.Row="0" Grid.Column="1" Text="{Binding EmailAddress}"/>
 
         <Label Text="Password:" Grid.Row="1"/>
-        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" Grid.Row="1" Grid.Column="1" Text="{Binding Password}"/>
+        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" Grid.Row="1" Grid.Column="1" Text="{Binding Password}"/>-->
 
-        <Button Text="Login" Command="{Binding LoginCommand}"  Grid.Row="2" Grid.ColumnSpan="2"/>
+        <!--<Button Text="Login" Command="{Binding LoginCommand}"  Grid.Row="2" Grid.ColumnSpan="2"/>-->
 
-        <Label Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Error}"  TextColor="Red"/>
+        <material:TextField 
+                x:Name="EmailEntry"
+                Grid.Row="0" Grid.Column="1"
+                Title="Email"
+                FontSize="18"
+                Text="{Binding EmailAddress}"
+                Padding="0, 0, 0, 20"/>
+
+        <material:TextField x:Name="PasswordEntry" Title="Password"  FontSize="18" IsPassword="True" Text="{Binding Password}"  Grid.Row="1" Grid.Column="1" Padding="0, 0, 0, 20">
+            <material:TextField.Attachments>
+                <material:TextFieldPasswordShowHideAttachment />
+            </material:TextField.Attachments>
+        </material:TextField>
+
+
+        <Button StyleClass="FilledButton" Text="Login" Command="{Binding LoginCommand}" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Label Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Error}"  TextColor="Red" HorizontalOptions="Center" Padding="10"/>
     </Grid>
 
 </ContentPage>

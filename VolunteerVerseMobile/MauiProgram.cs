@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using UraniumUI;
 using VolunteerVerseMobile.Interfaces;
 using VolunteerVerseMobile.Services;
 using VolunteerVerseMobile.ViewModels;
@@ -13,10 +14,13 @@ namespace VolunteerVerseMobile
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseUraniumUI()
+                .UseUraniumUIMaterial()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddMaterialIconFonts();
                 });
 
 #if DEBUG

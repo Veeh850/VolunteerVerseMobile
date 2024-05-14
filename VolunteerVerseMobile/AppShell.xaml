@@ -5,12 +5,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:VolunteerVerseMobile.Views"
     xmlns:locale="clr-namespace:VolunteerVerseMobile"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Flyout"
+    Shell.TabBarIsVisible="False">
 
     <ShellContent
-        Shell.NavBarIsVisible="true"
-        Title="VolunteerVerseMobile"
-        ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="LoginPage"/>
+     Shell.FlyoutItemIsVisible="False"
+     Title="VolunteerVerseMobile"
+     ContentTemplate="{DataTemplate views:LoginPage}"
+     Route="LoginPage"/>
+
+    <FlyoutItem Title="Alma" FlyoutDisplayOptions="AsMultipleItems">
+
+        <ShellContent
+            Shell.FlyoutItemIsVisible="True"
+            Title="Events"
+            ContentTemplate="{DataTemplate views:EventListPage}"
+            Route="EventListPage"/>
+
+        <ShellContent
+            Shell.FlyoutItemIsVisible="True"
+            Title="Profile"
+            ContentTemplate="{DataTemplate views:ProfilePage}"
+            Route="ProfilePage"/>
+
+    </FlyoutItem>
 
 </Shell>

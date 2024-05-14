@@ -9,6 +9,7 @@ namespace VolunteerVerseMobile
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(EventListPage), typeof(EventListPage));
+            Routing.RegisterRoute(nameof(EventDetailsPage), typeof(EventDetailsPage));
         }
     }
 }

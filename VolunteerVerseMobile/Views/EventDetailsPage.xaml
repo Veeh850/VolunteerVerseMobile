@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VolunteerVerseMobile.Views.EventDetailsPage"
+             xmlns:model="clr-namespace:VolunteerVerseMobile.Models"
+             xmlns:viewmodel ="clr-namespace:VolunteerVerseMobile.ViewModels"
+             x:DataType="viewmodel:EventDetailsViewModel"
+             xmlns:converters="clr-namespace:VolunteerVerseMobile.Utils.Converters"
+             Title="EventDetailsPage"
+             Appearing="DetailsPage_Appearing">
+
+    <ContentPage.Resources>
+        <converters:EventCapacityToStringConverter x:Key="capacityConverter"/>
+    </ContentPage.Resources>
+    
+    <VerticalStackLayout>
+        <Image Aspect="AspectFill" Source="{Binding EventDetails.ImageUri}" WidthRequest="150" HeightRequest="150"/>
+
+        <VerticalStackLayout>
+            <Label Text="Event time" />
+
+            <Label Text="{Binding EventDetails.StartTime, StringFormat='Starts: {0:yyyy.MM.dd HH:mm}'}"/>
+
+            <Label Text="{Binding EventDetails.EndTime, StringFormat='Ends: {0:yyyy.MM.dd HH:mm}'}"/>
+
+            <Label Text="{Binding EventDetails, Converter={StaticResource capacityConverter}, ConverterParameter={Binding EventDetails}}" />
+
+
+            <HorizontalStackLayout>
+                <Label Text="Location:"/>
+                <Label Text="{Binding EventDetails.Location}"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+        
+    </VerticalStackLayout>
+</ContentPage>

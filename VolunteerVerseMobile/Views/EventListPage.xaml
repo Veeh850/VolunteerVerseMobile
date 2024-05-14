@@ -7,7 +7,8 @@
              xmlns:viewmodel ="clr-namespace:VolunteerVerseMobile.ViewModels"
              x:DataType="viewmodel:EventListViewModel"
              Appearing="EventListPage_Appearing">
-    <Grid>
+    <StackLayout>
+        <SearchBar Text="{Binding Searchtext}" SearchCommand="{Binding LoadEventListCommand}"/>
         <RefreshView>
             <ContentView>
                 <CollectionView ItemsSource="{Binding EventPreviews}" SelectionMode="None">
@@ -18,14 +19,22 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:EventPreview">
+                            <Grid Padding="10">
+                                <Frame HeightRequest="125">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EventListViewModel}}, Path=GoToDetailsCommand}" 
+                                                              CommandParameter="{Binding Id}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid Padding="0" ColumnDefinitions="125,*">
+                                        <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
 
-                            <Grid Padding="0" ColumnDefinitions="125,*">
-                                <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
-                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
-                                    <Label Text="{Binding Name}" />
-                                    <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
+                                        </VerticalStackLayout>
+                                    </Grid>
 
-                                </VerticalStackLayout>
+                                </Frame>
                             </Grid>
 
                         </DataTemplate>
@@ -35,5 +44,5 @@
                 </CollectionView>
             </ContentView>
         </RefreshView>
-    </Grid>
+    </StackLayout>
 </ContentPage>

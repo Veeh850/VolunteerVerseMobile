@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<uranium:UraniumContentPage
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VolunteerVerseMobile.Views.EventListPage"
-             Title="EventListPage"
              xmlns:model="clr-namespace:VolunteerVerseMobile.Models"
              xmlns:viewmodel ="clr-namespace:VolunteerVerseMobile.ViewModels"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              x:DataType="viewmodel:EventListViewModel"
+             Title="EventList"
              Appearing="EventListPage_Appearing">
-    <StackLayout>
-        <SearchBar Text="{Binding Searchtext}" SearchCommand="{Binding LoadEventListCommand}"/>
+
+    <VerticalStackLayout>
+        <!--<SearchBar Text="{Binding Searchtext}" SearchCommand="{Binding LoadEventListCommand}"/>-->
+        <ImageButton Clicked="ShowBottomSheet" WidthRequest="100">
+            <ImageButton.Source>
+                <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Filter_alt}"/>
+            </ImageButton.Source>
+
+        </ImageButton>
         <RefreshView>
             <ContentView>
                 <CollectionView ItemsSource="{Binding EventPreviews}" SelectionMode="None">
@@ -44,5 +55,55 @@
                 </CollectionView>
             </ContentView>
         </RefreshView>
-    </StackLayout>
-</ContentPage>
+    </VerticalStackLayout>
+
+    <uranium:UraniumContentPage.Attachments>
+        <material:BottomSheetView x:Name="myBottomSheet" DisablePageWhenOpened="False" CloseOnTapOutside="True" HeightRequest="500">
+
+            <VerticalStackLayout>
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="By Name:" Grid.Row="0" Grid.Column="0"/>
+                    <Entry Text="{Binding EventFilter.Name}" Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Text="By Organization:" Grid.Row="1" Grid.Column="0"/>
+                    <Entry Text="{Binding EventFilter.OrganizationName}" Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Text="By Location:" Grid.Row="2" Grid.Column="0"/>
+                    <Entry Text="{Binding EventFilter.Location}" Grid.Row="2" Grid.Column="1"/>
+
+                    <Label Text="Start Date" Grid.Row="3" Grid.Column="0"/>
+                    <material:DatePickerField Date="{Binding EventFilter.StartDate}"  Grid.Row="3" Grid.Column="1" WidthRequest="200"/>
+
+                    <Label Text="End Date" Grid.Row="4" Grid.Column="0"/>
+                    <material:DatePickerField Date="{Binding EventFilter.EndDate}"  Grid.Row="4" Grid.Column="1" WidthRequest="200" />
+
+                </Grid>
+
+                <HorizontalStackLayout Spacing="20">
+
+                    <Button Text="Reset" WidthRequest="100" Command="{Binding ResetEventFilterCommand}"/>
+                    <Button Text="Search"  WidthRequest="100" Clicked="SearchBy_Filter"/>
+
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+            
+
+        </material:BottomSheetView>
+    </uranium:UraniumContentPage.Attachments>
+
+</uranium:UraniumContentPage>

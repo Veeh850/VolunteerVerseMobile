@@ -70,6 +70,18 @@ namespace VolunteerVerseMobile.ViewModels
 
         }
 
+        [RelayCommand]
+        public async Task ContinueWithoutLogin()
+        {
+            AccountContext.Email = string.Empty;
+            AccountContext.PictureUri = string.Empty;
+            AccountContext.FirstName = string.Empty;
+            AccountContext.LastName = string.Empty;
+            AccountContext.Token = string.Empty;
+
+            await Shell.Current.GoToAsync(nameof(EventListPage), true);
+        }
+
 
 
 

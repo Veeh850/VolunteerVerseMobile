@@ -25,10 +25,15 @@ namespace VolunteerVerseMobile.ViewModels
         [ObservableProperty]
         private string _searchtext;
 
+        [ObservableProperty]
+        private EventFilter _eventFilter;
+
         public EventListViewModel(IEventApiService eventApiService, IConnectivity connectivity)
         {
             _eventApiService = eventApiService;
             _connectivity = connectivity;
+
+            _eventFilter = new EventFilter(string.Empty);
 
         }
 
@@ -51,7 +56,7 @@ namespace VolunteerVerseMobile.ViewModels
             {
                 IsBusy = true;
 
-                var eventPreviews = await _eventApiService.GetAllEventPreviews(new EventFilter(Searchtext));
+                var eventPreviews = await _eventApiService.GetAllEventPreviews(EventFilter);
 
                 if(EventPreviews.Count != 0)
                 {
@@ -82,6 +87,15 @@ namespace VolunteerVerseMobile.ViewModels
                 {"eventId" , id}
             });
         }
+
+        [RelayCommand]
+        public async Task ResetEventFilter()
+        {
+            EventFilter = new EventFilter("");
+
+            await LoadEventList();
+        }
+
 
         public override async Task OnAppearing()
         {

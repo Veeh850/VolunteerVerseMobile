@@ -1,8 +1,9 @@
+using UraniumUI.Pages;
 using VolunteerVerseMobile.ViewModels;
 
 namespace VolunteerVerseMobile.Views;
 
-public partial class EventListPage : ContentPage
+public partial class EventListPage : UraniumContentPage
 {
     private readonly EventListViewModel _viewModel;
 
@@ -20,4 +21,17 @@ public partial class EventListPage : ContentPage
     {
         await _viewModel.OnAppearing();
     }
+
+    private void ShowBottomSheet(object sender, EventArgs e)
+    {
+        myBottomSheet.IsPresented = !myBottomSheet.IsPresented;
+    }
+
+    private async void SearchBy_Filter(object sender, EventArgs e)
+    {
+        await _viewModel.LoadEventList();
+
+        myBottomSheet.IsPresented = false;
+    }
+
 }

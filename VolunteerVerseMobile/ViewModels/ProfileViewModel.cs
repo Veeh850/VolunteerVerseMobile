@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,13 +21,14 @@ namespace VolunteerVerseMobile.ViewModels
 
         private readonly IAccountApiService _accountApiService;
 
+        public ObservableCollection<ProfileEvent> ProfileEvents { get; } = new ObservableCollection<ProfileEvent>();
+
         public ProfileViewModel(IAccountApiService accountApiService)
         {
             AccountDetails = new AccountDetails();
-
             _accountApiService = accountApiService;
 
-            AccountContext.Token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSmFub3MiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zdXJuYW1lIjoiS2lzcyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imtpc3NqYW5vc0B5YWhvby5jb20iLCJleHAiOjE3MTU3OTY2ODl9.ZbHKxxvZ2E-67AiMN74yx_MskUOVloutU2WvNEhfiaP1zNN9lroH4xZP89Z5qoez-5WxanS-JQm9M8o-yKvojg";
+            //AccountContext.Token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSmFub3MiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zdXJuYW1lIjoiS2lzcyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imtpc3NqYW5vc0B5YWhvby5jb20iLCJleHAiOjE3MTU3OTY2ODl9.ZbHKxxvZ2E-67AiMN74yx_MskUOVloutU2WvNEhfiaP1zNN9lroH4xZP89Z5qoez-5WxanS-JQm9M8o-yKvojg";
         }
 
         [RelayCommand]
@@ -52,9 +55,43 @@ namespace VolunteerVerseMobile.ViewModels
             
         }
 
+        [RelayCommand]
+        public async Task LoadProfileEvents()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            try
+            {
+                IsBusy = true;
+
+                var profileEvents = await _accountApiService.GetProfileEvents();
+
+                if (ProfileEvents.Count != 0)
+                {
+                    ProfileEvents.Clear();
+                }
+
+                foreach (var item in profileEvents)
+                {
+                    ProfileEvents.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Error");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
         public override async Task OnAppearing()
         {
             await LoadAccountDetails();
+            await LoadProfileEvents();
         }
     }
 }

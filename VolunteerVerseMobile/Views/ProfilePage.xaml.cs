@@ -14,7 +14,7 @@ public partial class ProfilePage : ContentPage
 		BindingContext = _viewModel;
 	}
 
-    private async void DetailsPage_Appearing(object sender, EventArgs e)
+    private async void ProfilePage_Appearing(object sender, EventArgs e)
     {
         await _viewModel.OnAppearing();
     }

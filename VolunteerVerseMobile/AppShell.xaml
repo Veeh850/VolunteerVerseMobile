@@ -7,13 +7,10 @@
     xmlns:locale="clr-namespace:VolunteerVerseMobile"
     xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons">
 
-    <!--<ShellContent
-         Shell.FlyoutItemIsVisible="True"
-         Title="VolunteerVerseMobile"
-         ContentTemplate="{DataTemplate views:LoginPage}"
-         Route="LoginPage"/>-->
-
     <TabBar>
+        <Tab Title="Login" Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Login}}">
+            <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
+        </Tab>
         <Tab Title="Events" Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Event}}">
             <ShellContent ContentTemplate="{DataTemplate views:EventListPage}" />
         </Tab>

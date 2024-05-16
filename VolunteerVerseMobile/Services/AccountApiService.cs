@@ -46,5 +46,26 @@ namespace VolunteerVerseMobile.Services
 
             return await response.Content.ReadFromJsonAsync<AccountDetails>();
         }
+
+        public async Task<List<ProfileEvent>> GetProfileEvents()
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccountContext.Token);
+
+            string url = Constants.ProfileEventsUrl;
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.IsSuccessStatusCode == false)
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponseDTO>();
+
+                if (errorResponse != null && errorResponse.Errors.Count != 0)
+                {
+                    throw new Exception(errorResponse.Errors[0]);
+                }
+            }
+
+            return await response.Content.ReadFromJsonAsync<List<ProfileEvent>>();
+        }
     }
 }

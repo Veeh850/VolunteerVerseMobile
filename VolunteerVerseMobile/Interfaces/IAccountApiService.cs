@@ -10,5 +10,7 @@ namespace VolunteerVerseMobile.Interfaces
     public interface IAccountApiService
     {
         public Task<AccountDetails> GetOwnAccountDetails();
+
+        public Task<List<ProfileEvent>> GetProfileEvents();
     }
 }

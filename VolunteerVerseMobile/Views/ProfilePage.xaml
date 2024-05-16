@@ -54,9 +54,9 @@
 
         <BoxView StyleClass="Divider" />
 
-        <Label Text="My Events" FontSize="Large" FontAttributes="Bold" Margin="20,10,0,0" />
+        <Label Text="My Events" FontSize="Medium" FontAttributes="Bold" Margin="20,10,0,0" />
 
-        <!--<RefreshView>
+        <RefreshView>
             <ContentView>
                 <CollectionView ItemsSource="{Binding ProfileEvents}" SelectionMode="None">
 
@@ -67,14 +67,35 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:ProfileEvent">
                             <Grid Padding="10">
-                                <Frame HeightRequest="125">
-                                    <Grid Padding="0" ColumnDefinitions="125,*">
-                                        <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
+                                <Frame HeightRequest="150">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfileViewModel}}, Path=GoToDetailsCommand}" 
+                                                              CommandParameter="{Binding Id}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid Padding="0" ColumnDefinitions="100,*">
+                                        <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="150" HeightRequest="150"/>
                                         <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
-                                            <Label Text="{Binding Name}" />
-                                            <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
-                                            <Label Text="{Binding }" />
+                                            <Label Text="{Binding Name}" FontSize="16" />
+                                            <HorizontalStackLayout>
+                                                <Image WidthRequest="16" HeightRequest="16">
+                                                    <Image.Source>
+                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Corporate_fare}"/>
+                                                    </Image.Source>
+                                                </Image>
+                                                <Label Text="{Binding Organization.Name}" Padding="5"/>
+                                            </HorizontalStackLayout>
+                                            <HorizontalStackLayout>
+                                                <Image WidthRequest="16" HeightRequest="16">
+                                                    <Image.Source>
+                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Schedule}"/>
+                                                    </Image.Source>
+                                                </Image>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Padding="5"/>
+                                                    <Label Text="{Binding EndTime, StringFormat='{0:d}'}" Padding="5"/>
+                                                </HorizontalStackLayout>
 
+                                            </HorizontalStackLayout>
                                         </VerticalStackLayout>
                                     </Grid>
                                 </Frame>
@@ -84,7 +105,7 @@
 
                 </CollectionView>
             </ContentView>
-        </RefreshView>-->
+        </RefreshView>
 
 
     </StackLayout>

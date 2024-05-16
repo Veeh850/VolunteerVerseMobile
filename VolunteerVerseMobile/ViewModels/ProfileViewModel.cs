@@ -11,6 +11,7 @@ using VolunteerVerseMobile.Interfaces;
 using VolunteerVerseMobile.Models;
 using VolunteerVerseMobile.Models.Account;
 using VolunteerVerseMobile.Utils;
+using VolunteerVerseMobile.Views;
 
 namespace VolunteerVerseMobile.ViewModels
 {
@@ -27,8 +28,6 @@ namespace VolunteerVerseMobile.ViewModels
         {
             AccountDetails = new AccountDetails();
             _accountApiService = accountApiService;
-
-            //AccountContext.Token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSmFub3MiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zdXJuYW1lIjoiS2lzcyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imtpc3NqYW5vc0B5YWhvby5jb20iLCJleHAiOjE3MTU3OTY2ODl9.ZbHKxxvZ2E-67AiMN74yx_MskUOVloutU2WvNEhfiaP1zNN9lroH4xZP89Z5qoez-5WxanS-JQm9M8o-yKvojg";
         }
 
         [RelayCommand]
@@ -86,6 +85,15 @@ namespace VolunteerVerseMobile.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        public async Task GoToDetails(int id)
+        {
+            await Shell.Current.GoToAsync(nameof(EventDetailsPage), true, new Dictionary<string, object>
+            {
+                {"eventId" , id}
+            });
         }
 
         public override async Task OnAppearing()

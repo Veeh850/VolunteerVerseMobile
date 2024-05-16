@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VolunteerVerseMobile.Models.Account
+namespace VolunteerVerseMobile.Models
 {
     public class ProfileEvent
     {

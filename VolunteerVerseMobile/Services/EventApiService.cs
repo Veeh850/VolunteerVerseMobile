@@ -25,12 +25,36 @@ namespace VolunteerVerseMobile.Services
 
             string url = Constants.EventUrl;
 
-            if(eventFilter != null)
-            {
-                if(string.IsNullOrEmpty(eventFilter.Name) == false)
+            if (eventFilter != null)
+            { 
+
+                url += "?";
+            
+                if (string.IsNullOrEmpty(eventFilter.Name) == false)
                 {
-                    url = url + $"?name={eventFilter.Name}";
+                    url += $"name={eventFilter.Name}&";
                 }
+
+                if(string.IsNullOrEmpty(eventFilter.OrganizationName) == false)
+                {
+                    url += $"organizationName={eventFilter.OrganizationName}&";
+                }
+
+                if(string.IsNullOrEmpty(eventFilter.Location) == false)
+                {
+                    url += $"location={eventFilter.Location}&";
+                }
+
+                if(eventFilter.StartDate != null)
+                {
+                    url += $"startDate={eventFilter.StartDate}&";
+                }
+
+                if (eventFilter.EndDate != null)
+                {
+                    url += $"endDate={eventFilter.EndDate}&";
+                }
+
             }
 
 

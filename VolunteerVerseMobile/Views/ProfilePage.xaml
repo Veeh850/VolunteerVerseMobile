@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VolunteerVerseMobile.Views.ProfilePage"
              xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:model="clr-namespace:VolunteerVerseMobile.Models"
              xmlns:viewmodel ="clr-namespace:VolunteerVerseMobile.ViewModels"
              x:DataType="viewmodel:ProfileViewModel"
@@ -67,39 +69,56 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:ProfileEvent">
                             <Grid Padding="10">
-                                <Frame HeightRequest="150">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfileViewModel}}, Path=GoToDetailsCommand}" 
-                                                              CommandParameter="{Binding Id}"/>
-                                    </Frame.GestureRecognizers>
-                                    <Grid Padding="0" ColumnDefinitions="100,*">
-                                        <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="150" HeightRequest="150"/>
-                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
-                                            <Label Text="{Binding Name}" FontSize="16" />
-                                            <HorizontalStackLayout>
-                                                <Image WidthRequest="16" HeightRequest="16">
-                                                    <Image.Source>
-                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Corporate_fare}"/>
-                                                    </Image.Source>
-                                                </Image>
-                                                <Label Text="{Binding Organization.Name}" Padding="5"/>
-                                            </HorizontalStackLayout>
-                                            <HorizontalStackLayout>
-                                                <Image WidthRequest="16" HeightRequest="16">
-                                                    <Image.Source>
-                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Schedule}"/>
-                                                    </Image.Source>
-                                                </Image>
-                                                <HorizontalStackLayout>
-                                                    <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Padding="5"/>
-                                                    <Label Text="{Binding EndTime, StringFormat='{0:d}'}" Padding="5"/>
-                                                </HorizontalStackLayout>
+                                <uranium:ExpanderView>
+                                    <uranium:ExpanderView.Header>
+                                        <Frame HeightRequest="200">
+                                            <!--<Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfileViewModel}}, Path=GoToDetailsCommand}" 
+                                                          CommandParameter="{Binding Id}"/>
+                                            </Frame.GestureRecognizers>-->
+                                            <Grid Padding="0" ColumnDefinitions="120,*">
+                                                <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="200" HeightRequest="200"/>
+                                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
+                                                    <Label Text="{Binding Name}" FontSize="16" />
+                                                    <HorizontalStackLayout>
+                                                        <Image WidthRequest="16" HeightRequest="16">
+                                                            <Image.Source>
+                                                                <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Corporate_fare}"/>
+                                                            </Image.Source>
+                                                        </Image>
+                                                        <Label Text="{Binding Organization.Name}" Padding="5"/>
+                                                    </HorizontalStackLayout>
+                                                    <HorizontalStackLayout>
+                                                        <Image WidthRequest="16" HeightRequest="16">
+                                                            <Image.Source>
+                                                                <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Schedule}"/>
+                                                            </Image.Source>
+                                                        </Image>
+                                                        <HorizontalStackLayout>
+                                                            <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Padding="5"/>
+                                                            <Label Text="{Binding EndTime, StringFormat='{0:d}'}" Padding="5"/>
+                                                        </HorizontalStackLayout>
+                                                    </HorizontalStackLayout>
+                                                </VerticalStackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </uranium:ExpanderView.Header>
+                                
+                                        <CollectionView ItemsSource="{Binding Tasks}" SelectionMode="None">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                                            </CollectionView.ItemsLayout>
 
-                                            </HorizontalStackLayout>
-                                        </VerticalStackLayout>
-                                    </Grid>
-                                </Frame>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                       
+                                </uranium:ExpanderView>
                             </Grid>
+              
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
 

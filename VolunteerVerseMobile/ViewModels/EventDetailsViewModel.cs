@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using VolunteerVerseMobile.Interfaces;
 using VolunteerVerseMobile.Models;
+using VolunteerVerseMobile.Utils;
+using VolunteerVerseMobile.Views;
 
 namespace VolunteerVerseMobile.ViewModels
 {
@@ -48,6 +50,95 @@ namespace VolunteerVerseMobile.ViewModels
             }
             catch (Exception)
             {
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        [RelayCommand]
+        public Task GoToOrganizationDetailsPage()
+        {
+            throw new NotImplementedException();
+        }
+
+        [RelayCommand]
+        public async Task JoinButtonClicked()
+        {
+            if(IsBusy)
+            {
+                return;
+            }
+
+            try
+            {
+                if (string.IsNullOrEmpty(AccountContext.Token))
+                {
+                    await Shell.Current.Navigation.PopToRootAsync();
+
+                    IsBusy = false;
+
+                    return;
+                }
+
+                IsBusy = true;
+
+                if(EventDetails.IsJoined == false)
+                {
+                    await _eventApiService.RegisterForEvent(EventId);
+
+                }
+                else
+                {
+                    await _eventApiService.DeleteEventRegistration(EventId);
+                }
+
+                EventDetails = await _eventApiService.GetEventDetailsById(EventId);
+
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        [RelayCommand]
+        public async Task TaskButtonClicked(TaskDetailsForEvents taskDetails)
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+
+            try
+            {
+                if(string.IsNullOrEmpty(AccountContext.Token))
+                {
+                    await Shell.Current.Navigation.PopToRootAsync();
+
+                    IsBusy = false;
+
+                    return;
+                }
+
+                IsBusy = true;
+
+                if(taskDetails.IsApplied == false)
+                {
+                    await _eventApiService.ApplyForTask(EventId, taskDetails.Id);
+                }
+                else
+                {
+                    await _eventApiService.RemoveApplicationForTask(EventId, taskDetails.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
             finally
             {

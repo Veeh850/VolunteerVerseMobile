@@ -6,32 +6,187 @@
              xmlns:viewmodel ="clr-namespace:VolunteerVerseMobile.ViewModels"
              x:DataType="viewmodel:EventDetailsViewModel"
              xmlns:converters="clr-namespace:VolunteerVerseMobile.Utils.Converters"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              Title="EventDetailsPage"
              Appearing="DetailsPage_Appearing">
 
     <ContentPage.Resources>
         <converters:EventCapacityToStringConverter x:Key="capacityConverter"/>
+        <converters:TaskButtonTextConverter x:Key="taskButtonCoverter" />
+        <converters:TaskCapacityToStringConverter x:Key="taskCapacityConverter" />
+        <converters:EventJoinButtonTextConverter x:Key="eventJoinButtonConverter" />
     </ContentPage.Resources>
-    
-    <VerticalStackLayout>
-        <Image Aspect="AspectFill" Source="{Binding EventDetails.ImageUri}" WidthRequest="150" HeightRequest="150"/>
 
+    <RefreshView>
+        <ScrollView>
+            
         <VerticalStackLayout>
-            <Label Text="Event time" />
+            <Image Aspect="AspectFill" Source="{Binding EventDetails.ImageUri}" WidthRequest="300" HeightRequest="300"/>
 
-            <Label Text="{Binding EventDetails.StartTime, StringFormat='Starts: {0:yyyy.MM.dd HH:mm}'}"/>
+            <Label Text="{Binding EventDetails.Name}" HorizontalTextAlignment="Center"/>
 
-            <Label Text="{Binding EventDetails.EndTime, StringFormat='Ends: {0:yyyy.MM.dd HH:mm}'}"/>
+                <Button Text="{Binding EventDetails, Converter={StaticResource eventJoinButtonConverter}, ConverterParameter={Binding EventDetails}}"
+                        WidthRequest="200"
+                        Command="{Binding JoinButtonClickedCommand}"/>
 
-            <Label Text="{Binding EventDetails, Converter={StaticResource capacityConverter}, ConverterParameter={Binding EventDetails}}" />
+                <VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <HorizontalStackLayout>
+
+                        <Image>
+                            <Image.Source>
+                                <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Punch_clock}"/>
+                            </Image.Source>
+                        </Image>
+
+                        <Label Text="Event time"/>
+                    </HorizontalStackLayout>
+
+                    <Label Text="{Binding EventDetails.StartTime, StringFormat='Starts: {0:yyyy.MM.dd HH:mm}'}"/>
+
+                    <Label Text="{Binding EventDetails.EndTime, StringFormat='Ends: {0:yyyy.MM.dd HH:mm}'}"/>
+
+                    <Label Text="{Binding EventDetails, Converter={StaticResource capacityConverter}, ConverterParameter={Binding EventDetails}}" />
+
+                </VerticalStackLayout>
 
 
-            <HorizontalStackLayout>
-                <Label Text="Location:"/>
-                <Label Text="{Binding EventDetails.Location}"/>
-            </HorizontalStackLayout>
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="30">
+                        <Image>
+                            <Image.Source>
+                                <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Location_on}"/>
+                            </Image.Source>
+                        </Image>
+                        <Label Text="Location:"/>
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding EventDetails.Location}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <Image>
+                            <Image.Source>
+                                <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Domain}"/>
+                            </Image.Source>
+                        </Image>
+                        <Label Text="Organization:" />
+                    </HorizontalStackLayout>
+
+                    <Label Text="{Binding EventDetails.Organization.Name}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToOrganizationDetailsPageCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <HorizontalStackLayout>
+                        <Image>
+                            <Image.Source>
+                                <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Call}"/>
+                            </Image.Source>
+                        </Image>
+
+                        <Label Text="{Binding EventDetails.Phone}" />
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+
+            <Label Text="Tasks:" />
+
+            <CollectionView ItemsSource="{Binding EventDetails.TaskDetails}" SelectionMode="None">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:TaskDetailsForEvents">
+                            <VerticalStackLayout>
+
+                                <HorizontalStackLayout>
+
+                                    <Image>
+                                        <Image.Source>
+                                            <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Assignment}"/>
+                                        </Image.Source>
+                                    </Image>
+
+                                    <Label Text="{Binding Name}" />
+
+                                    <Button Text="{Binding Source={RelativeSource AncestorType={x:Type model:TaskDetailsForEvents}}, Converter={StaticResource taskButtonCoverter}, ConverterParameter={Binding}}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EventDetailsViewModel}}, Path=TaskButtonClickedCommand}"/>
+
+                                </HorizontalStackLayout>
+
+                                <uranium:ExpanderView>
+                                    <uranium:ExpanderView.Header>
+                                        <VerticalStackLayout>
+
+
+                                            <HorizontalStackLayout IsVisible="{Binding NeedApproval}">
+
+                                                <Image>
+                                                    <Image.Source>
+                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Task_alt}"/>
+                                                    </Image.Source>
+                                                </Image>
+
+                                                <Label Text="Approval needed" />
+
+                                            </HorizontalStackLayout>
+
+                                            <HorizontalStackLayout>
+                                                <Image>
+                                                    <Image.Source>
+                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Group}"/>
+                                                    </Image.Source>
+                                                </Image>
+
+
+                                                <Label Text="{Binding Source={RelativeSource AncestorType={x:Type model:TaskDetailsForEvents}}, Converter={StaticResource taskCapacityConverter}, ConverterParameter={Binding}}" />
+
+                                            </HorizontalStackLayout>
+
+                                        </VerticalStackLayout>
+
+
+                                    </uranium:ExpanderView.Header>
+
+                                    <VerticalStackLayout>
+
+                                        <Label Text="Description:" />
+                                        <Label Text="{Binding Description}" />
+
+                                        <CollectionView ItemsSource="{Binding Skills}" SelectionMode="None">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                            </CollectionView.ItemsLayout>
+
+                                            <CollectionView.ItemTemplate>
+
+                                                <DataTemplate x:DataType="model:SkillResponseDTO">
+                                                    <StackLayout StyleClass="PrimaryContainer" Padding="10">
+                                                        <Label Text="{Binding Name}" />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+
+
+                                </uranium:ExpanderView>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
 
         </VerticalStackLayout>
-        
-    </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
 </ContentPage>

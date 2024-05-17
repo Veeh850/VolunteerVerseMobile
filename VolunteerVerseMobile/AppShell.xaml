@@ -14,6 +14,9 @@
         <Tab Title="Events" Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Event}}">
             <ShellContent ContentTemplate="{DataTemplate views:EventListPage}" />
         </Tab>
+        <Tab Title="Organizations" Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Corporate_fare}}">
+            <ShellContent ContentTemplate="{DataTemplate views:OrganizationListPage}" />
+        </Tab>
         <Tab Title="Profile" Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Person}}">
             <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" />
         </Tab>

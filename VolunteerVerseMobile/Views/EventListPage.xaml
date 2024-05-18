@@ -9,101 +9,115 @@
              xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              x:DataType="viewmodel:EventListViewModel"
-             Title="EventList"
+             Title="Events"
              Appearing="EventListPage_Appearing">
 
-    <VerticalStackLayout>
-        <!--<SearchBar Text="{Binding Searchtext}" SearchCommand="{Binding LoadEventListCommand}"/>-->
-        <ImageButton Clicked="ShowBottomSheet" WidthRequest="100">
-            <ImageButton.Source>
-                <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Filter_alt}"/>
-            </ImageButton.Source>
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-        </ImageButton>
-        <RefreshView>
-            <ContentView>
-                <CollectionView ItemsSource="{Binding EventPreviews}" SelectionMode="None">
+                <SearchBar Text="{Binding Searchtext}" SearchCommand="{Binding SearchBarCommand}" Grid.Column="0" Margin="0,0,10,0"/>
 
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                    </CollectionView.ItemsLayout>
+                <ImageButton Clicked="ShowBottomSheet" WidthRequest="100" HorizontalOptions="End" Grid.Column="1">
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Filter_alt}"/>
+                    </ImageButton.Source>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:EventPreview">
-                            <Grid Padding="10">
-                                <Frame HeightRequest="125">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EventListViewModel}}, Path=GoToDetailsCommand}" 
+                </ImageButton>
+
+            </Grid>
+            <RefreshView>
+                <ContentView>
+                    <CollectionView ItemsSource="{Binding EventPreviews}" SelectionMode="None">
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:EventPreview">
+                                <Grid Padding="10">
+                                    <Frame HeightRequest="125">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EventListViewModel}}, Path=GoToDetailsCommand}" 
                                                               CommandParameter="{Binding Id}"/>
-                                    </Frame.GestureRecognizers>
-                                    <Grid Padding="0" ColumnDefinitions="125,*">
-                                        <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
-                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
-                                            <Label Text="{Binding Name}" />
-                                            <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
+                                        </Frame.GestureRecognizers>
+                                        <Grid Padding="0" ColumnDefinitions="125,*">
+                                            <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
+                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
+                                                <Label Text="{Binding Name}" />
+                                                <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
 
-                                        </VerticalStackLayout>
-                                    </Grid>
+                                            </VerticalStackLayout>
+                                        </Grid>
 
-                                </Frame>
-                            </Grid>
+                                    </Frame>
+                                </Grid>
 
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
 
 
-                </CollectionView>
-            </ContentView>
-        </RefreshView>
-    </VerticalStackLayout>
+                    </CollectionView>
+                </ContentView>
+            </RefreshView>
+        </VerticalStackLayout>
+
+    </ScrollView>
 
     <uranium:UraniumContentPage.Attachments>
-        <material:BottomSheetView x:Name="myBottomSheet" DisablePageWhenOpened="False" CloseOnTapOutside="True" HeightRequest="500">
+            <material:BottomSheetView x:Name="myBottomSheet" DisablePageWhenOpened="False" CloseOnTapOutside="True" HeightRequest="500">
 
-            <VerticalStackLayout>
-                <Grid Margin="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <VerticalStackLayout>
+                    <Grid Margin="10" RowSpacing="20" ColumnSpacing="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                        </Grid.RowDefinitions>
 
-                    <Label Text="By Name:" Grid.Row="0" Grid.Column="0"/>
-                    <Entry Text="{Binding EventFilter.Name}" Grid.Row="0" Grid.Column="1"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <Label Text="By Organization:" Grid.Row="1" Grid.Column="0"/>
-                    <Entry Text="{Binding EventFilter.OrganizationName}" Grid.Row="1" Grid.Column="1"/>
+                        <Label Text="Name:" Grid.Row="0" Grid.Column="0" WidthRequest="90" Margin="0,10"/>
+                        <Entry Text="{Binding EventFilter.Name}" Grid.Row="0" Grid.Column="1"/>
 
-                    <Label Text="By Location:" Grid.Row="2" Grid.Column="0"/>
-                    <Entry Text="{Binding EventFilter.Location}" Grid.Row="2" Grid.Column="1"/>
+                        <Label Text="Organization:" Grid.Row="1" Grid.Column="0" WidthRequest="90" Margin="0,10"/>
+                        <Entry Text="{Binding EventFilter.OrganizationName}" Grid.Row="1" Grid.Column="1"/>
 
-                    <Label Text="Start Date" Grid.Row="3" Grid.Column="0"/>
-                    <material:DatePickerField Date="{Binding EventFilter.StartDate}"  Grid.Row="3" Grid.Column="1" WidthRequest="200"/>
+                        <Label Text="Location:" Grid.Row="2" Grid.Column="0" WidthRequest="90" Margin="0,10"/>
+                        <Entry Text="{Binding EventFilter.Location}" Grid.Row="2" Grid.Column="1"/>
 
-                    <Label Text="End Date" Grid.Row="4" Grid.Column="0"/>
-                    <material:DatePickerField Date="{Binding EventFilter.EndDate}"  Grid.Row="4" Grid.Column="1" WidthRequest="200" />
+                        <Label Text="Start Date:" Grid.Row="3" Grid.Column="0" WidthRequest="90" Margin="0,20"/>
+                        <material:DatePickerField Date="{Binding EventFilter.StartDate}"  Grid.Row="3" Grid.Column="1" WidthRequest="200"/>
 
-                </Grid>
+                        <Label Text="End Date:" Grid.Row="4" Grid.Column="0" WidthRequest="90" Margin="0,20"/>
+                        <material:DatePickerField Date="{Binding EventFilter.EndDate}"  Grid.Row="4" Grid.Column="1" WidthRequest="200" />
 
-                <HorizontalStackLayout Spacing="20">
+                    </Grid>
 
-                    <Button Text="Reset" WidthRequest="100" Command="{Binding ResetEventFilterCommand}"/>
-                    <Button Text="Search"  WidthRequest="100" Clicked="SearchBy_Filter"/>
+                    <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
 
-                </HorizontalStackLayout>
+                        <Button Text="Reset" WidthRequest="100" Command="{Binding ResetEventFilterCommand}"/>
+                        <Button Text="Search"  WidthRequest="100" Clicked="SearchBy_Filter"/>
 
-            </VerticalStackLayout>
-            
+                    </HorizontalStackLayout>
 
-        </material:BottomSheetView>
-    </uranium:UraniumContentPage.Attachments>
+                </VerticalStackLayout>
+
+
+            </material:BottomSheetView>
+        </uranium:UraniumContentPage.Attachments>
+
 
 </uranium:UraniumContentPage>

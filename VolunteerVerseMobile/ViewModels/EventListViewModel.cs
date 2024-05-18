@@ -80,6 +80,14 @@ namespace VolunteerVerseMobile.ViewModels
         }
 
         [RelayCommand]
+        public async Task SearchBar()
+        {
+            EventFilter = new EventFilter(Searchtext);
+
+            await LoadEventList();
+        }
+
+        [RelayCommand]
         public async Task GoToDetails(int id)
         {
             await Shell.Current.GoToAsync(nameof(EventDetailsPage), true, new Dictionary<string, object>

@@ -35,6 +35,8 @@
 
                  <Button StyleClass="FilledButton" Text="Login" Command="{Binding LoginCommand}"/>
                  <Label Text="{Binding Error}" TextColor="Red" HorizontalOptions="Center" Padding="10"/>
+
+                <Button StyleClass="FilledButton" Text="Continue without Login" Command="{Binding ContinueWithoutLoginCommand}"/>
             </StackLayout>
            
         </Frame>

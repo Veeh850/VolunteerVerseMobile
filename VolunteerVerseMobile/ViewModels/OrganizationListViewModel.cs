@@ -71,7 +71,7 @@ namespace VolunteerVerseMobile.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(OrganizationDetailsPage), true, new Dictionary<string, object>
             {
-                {"orgId" , id}
+                {"organizationId" , id}
             });
         }
 

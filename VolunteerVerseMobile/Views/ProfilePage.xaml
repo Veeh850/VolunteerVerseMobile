@@ -10,7 +10,7 @@
              x:DataType="viewmodel:ProfileViewModel"
              Title="ProfilePage"
              Appearing="ProfilePage_Appearing">
-
+    <ScrollView>
     <StackLayout>
 
         <Frame CornerRadius="100" 
@@ -128,5 +128,6 @@
 
 
     </StackLayout>
+    </ScrollView>
     
 </ContentPage>

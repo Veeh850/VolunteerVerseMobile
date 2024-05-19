@@ -18,9 +18,4 @@ public partial class OrganizationDetailsPage : ContentPage
     {
         await _viewModel.OnAppearing();
     }
-
-    private void ContentPage_Appearing(object sender, EventArgs e)
-    {
-
-    }
 }

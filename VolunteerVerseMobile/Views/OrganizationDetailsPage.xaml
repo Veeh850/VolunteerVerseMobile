@@ -35,16 +35,84 @@
                     </VerticalStackLayout>
                 </Frame>
 
-                <Frame CornerRadius="15" BackgroundColor="{StaticResource Gray600}" Margin="0,0,0,10">
+                <Frame CornerRadius="15" BackgroundColor="{StaticResource Gray600}" Margin="0,0,0,30">
                     <VerticalStackLayout>
                         <Label Text="Description" HorizontalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Margin="0,0,0,10"/>
                         <Label Text="{Binding OrganizationDetails.Description}" HorizontalTextAlignment="Start" />
                     </VerticalStackLayout>
                 </Frame>
-                
-                
 
                 <Label Text="Events" FontSize="Medium"/>
+
+
+                <ContentView>
+                    <CollectionView ItemsSource="{Binding OrganizationDetails.EventPreviews}" SelectionMode="None"  ItemsLayout="HorizontalList">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:EventPreview">
+                                <Grid Padding="0, 10, 10, 10">
+                                    <Frame HeightRequest="180" WidthRequest="250">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrganizationDetailsViewModel}}, Path=GoToDetailsCommand}" 
+                                                                    CommandParameter="{Binding Id}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid Padding="0" RowDefinitions="80, 40, *">
+                                            <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="200" HeightRequest="200"/>
+                                          
+                                             <Label Text="{Binding Name}" Grid.Row="1" HorizontalOptions="Center" FontAttributes="Bold" FontSize="16"/>
+                                             <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Grid.Row="2" HorizontalOptions="Center"/>
+
+                                        </Grid>
+
+                                    </Frame>
+                                </Grid>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+
+                    </CollectionView>
+                </ContentView>
+
+                <Label Text="Members" FontSize="Medium" Margin="0, 30,0,0"/>
+
+
+                <ContentView>
+                    <CollectionView ItemsSource="{Binding OrganizationDetails.OrganizationUsers}" SelectionMode="None"  ItemsLayout="HorizontalList">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:OrganizationUser">
+                                <Grid Padding="0, 10, 10, 10">
+                                    <Frame HeightRequest="150" WidthRequest="250">
+                                        <Grid Padding="0" RowDefinitions="*, 40, *, *">
+                                            <Frame CornerRadius="100" 
+                                                   HorizontalOptions="Center" VerticalOptions="Center"
+                                                   WidthRequest="50" HeightRequest="50" Grid.Row="0">
+
+                                                <Image Source="{Binding ProfilePicture}" 
+                                                       Aspect="AspectFill" 
+                                                       HorizontalOptions="Center" VerticalOptions="Center"
+                                                       WidthRequest="150" HeightRequest="150"/>         
+                                            </Frame>
+
+                                            <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,10" Grid.Row="1">
+                                                <Label Text="{Binding FirstName}"/>
+                                                <Label Text="{Binding LastName}" Margin="5,0,0,0" />
+                                            </HorizontalStackLayout>
+
+                                            <Label Text="{Binding Email}" Grid.Row="2" HorizontalOptions="Center" />
+                                            <Label Text="{Binding Phone}" Grid.Row="3" HorizontalOptions="Center" />
+                                        </Grid>
+
+                                    </Frame>
+                                </Grid>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+
+                    </CollectionView>
+                </ContentView>
             </VerticalStackLayout>
         </ScrollView>
     </RefreshView>

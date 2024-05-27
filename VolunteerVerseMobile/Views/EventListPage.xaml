@@ -74,24 +74,7 @@
     </ScrollView>
 
     <uranium:UraniumContentPage.Attachments>
-            <material:BottomSheetView x:Name="myBottomSheet" DisablePageWhenOpened="False" CloseOnTapOutside="True" HeightRequest="500">
-
-                <VerticalStackLayout>
-                    <Grid Margin="10" RowSpacing="20" ColumnSpacing="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+        <material:BottomSheetView x:Name="myBottomSheet" DisablePageWhenOpened="False" CloseOnTapOutside="True" HeightRequest="500">
 
             <VerticalStackLayout Padding="20">
                 <Label Text="Filter by:" HorizontalOptions="Center" FontSize="18" Margin="0,0,0,20"/>
@@ -127,8 +110,11 @@
                     <Button StyleClass="FilledButton" Text="Search"  WidthRequest="100" Clicked="SearchBy_Filter"/>
                 </FlexLayout>
 
-            </material:BottomSheetView>
-        </uranium:UraniumContentPage.Attachments>
+            </VerticalStackLayout>
+
+
+        </material:BottomSheetView>
+    </uranium:UraniumContentPage.Attachments>
 
 
 </uranium:UraniumContentPage>

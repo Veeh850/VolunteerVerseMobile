@@ -98,6 +98,13 @@ namespace VolunteerVerseMobile.ViewModels
 
         public override async Task OnAppearing()
         {
+            if(string.IsNullOrEmpty(AccountContext.Token))
+            {
+                await Shell.Current.Navigation.PopAsync();
+
+                return;
+            }
+
             await LoadAccountDetails();
             await LoadProfileEvents();
         }

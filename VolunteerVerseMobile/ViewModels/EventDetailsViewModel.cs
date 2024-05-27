@@ -77,6 +77,8 @@ namespace VolunteerVerseMobile.ViewModels
                 {
                     await Shell.Current.Navigation.PopToRootAsync();
 
+                    await Shell.Current.GoToAsync(nameof(LoginPage));
+
                     IsBusy = false;
 
                     return;
@@ -120,6 +122,8 @@ namespace VolunteerVerseMobile.ViewModels
                 {
                     await Shell.Current.Navigation.PopToRootAsync();
 
+                    await Shell.Current.GoToAsync(nameof(LoginPage));
+
                     IsBusy = false;
 
                     return;
@@ -130,11 +134,14 @@ namespace VolunteerVerseMobile.ViewModels
                 if(taskDetails.IsApplied == false)
                 {
                     await _eventApiService.ApplyForTask(EventId, taskDetails.Id);
+
                 }
                 else
                 {
                     await _eventApiService.RemoveApplicationForTask(EventId, taskDetails.Id);
                 }
+
+                EventDetails = await _eventApiService.GetEventDetailsById(EventId);
             }
             catch (Exception ex)
             {

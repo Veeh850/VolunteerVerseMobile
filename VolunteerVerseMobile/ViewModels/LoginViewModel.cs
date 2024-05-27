@@ -54,7 +54,7 @@ namespace VolunteerVerseMobile.ViewModels
                 AccountContext.LastName = result.LastName;
                 AccountContext.Token = result.Token;
 
-                await Shell.Current.GoToAsync(nameof(EventListPage), true);
+                await Shell.Current.GoToAsync("//main/EventListPage", true);
 
             }
             catch (Exception ex)
@@ -79,7 +79,8 @@ namespace VolunteerVerseMobile.ViewModels
             AccountContext.LastName = string.Empty;
             AccountContext.Token = string.Empty;
 
-            await Shell.Current.GoToAsync(nameof(EventListPage), true);
+            //await Shell.Current.GoToAsync($"{nameof(EventListPage)}", true);
+            await Shell.Current.GoToAsync("//main/EventListPage", true);
         }
 
 

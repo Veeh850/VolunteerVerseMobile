@@ -5,17 +5,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:VolunteerVerseMobile.Views"
     xmlns:locale="clr-namespace:VolunteerVerseMobile"
-    xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons">
+    xmlns:utils="clr-namespace:VolunteerVerseMobile.Utils"
+    xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+    xmlns:converters="clr-namespace:VolunteerVerseMobile.Utils.Converters">
 
-    <TabBar>
-        <Tab Title="Login" Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Login}}">
-            <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
-        </Tab>
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage"/>
+
+
+    <TabBar Route="main">
         <Tab Title="Events" Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Event}}">
             <ShellContent ContentTemplate="{DataTemplate views:EventListPage}" />
         </Tab>
         <Tab Title="Profile" Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Person}}">
-            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}"/>
         </Tab>
     </TabBar>
 

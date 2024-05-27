@@ -11,54 +11,55 @@
              Title="ProfilePage"
              Appearing="ProfilePage_Appearing">
 
-    <StackLayout>
+    <ScrollView>
+        
+        <StackLayout>
 
-        <Frame CornerRadius="100" 
-               HorizontalOptions="Center" VerticalOptions="Center"
-               Margin="0, 20, 0, 0"
-               WidthRequest="150" HeightRequest="150">
-
-            <Image Source="{Binding AccountDetails.ProfilePictureUri}" 
-                   Aspect="AspectFill" 
+            <Frame CornerRadius="100" 
                    HorizontalOptions="Center" VerticalOptions="Center"
-                   WidthRequest="150" HeightRequest="150"/>
-        </Frame>
+                   Margin="0, 20, 0, 0"
+                   WidthRequest="150" HeightRequest="150">
 
-        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
-            <Label Text="{Binding AccountDetails.FirstName}"
-                   FontSize="Large"
-                   FontAttributes="Bold"/>
-            <Label Text="{Binding AccountDetails.LastName}"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   Margin="5,0,0,0" />
-        </HorizontalStackLayout>
+                <Image Source="{Binding AccountDetails.ProfilePictureUri}" 
+                       Aspect="AspectFill" 
+                       HorizontalOptions="Center" VerticalOptions="Center"
+                       WidthRequest="150" HeightRequest="150"/>
+            </Frame>
 
-        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
-            <Image WidthRequest="24" HeightRequest="24">
-                <Image.Source>
-                    <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Mail}"/>
-                </Image.Source>
-            </Image>
-            <Label Text="{Binding AccountDetails.Email}" 
-                   Margin="5,5"/>
-        </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                <Label Text="{Binding AccountDetails.FirstName}"
+                       FontSize="Large"
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding AccountDetails.LastName}"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       Margin="5,0,0,0" />
+            </HorizontalStackLayout>
 
-        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
-            <Image WidthRequest="24" HeightRequest="24">
-                <Image.Source>
-                    <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Call}" />
-                </Image.Source>
-            </Image>
-            <Label Text="{Binding AccountDetails.Phone}"
-                   Margin="5,5" />
-        </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                <Image WidthRequest="24" HeightRequest="24">
+                    <Image.Source>
+                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Mail}"/>
+                    </Image.Source>
+                </Image>
+                <Label Text="{Binding AccountDetails.Email}" 
+                       Margin="5,5"/>
+            </HorizontalStackLayout>
 
-        <BoxView StyleClass="Divider" />
+            <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                <Image WidthRequest="24" HeightRequest="24">
+                    <Image.Source>
+                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Call}" />
+                    </Image.Source>
+                </Image>
+                <Label Text="{Binding AccountDetails.Phone}"
+                       Margin="5,5" />
+            </HorizontalStackLayout>
 
-        <Label Text="My Events" FontSize="Medium" FontAttributes="Bold" Margin="20,10,0,0" />
+            <BoxView StyleClass="Divider" />
 
-        <RefreshView>
+            <Label Text="My Events" FontSize="Medium" FontAttributes="Bold" Margin="20,10,0,0" />
+
             <ContentView>
                 <CollectionView ItemsSource="{Binding ProfileEvents}" SelectionMode="None">
 
@@ -69,24 +70,25 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:ProfileEvent">
                             <Grid Padding="10">
-                                <uranium:ExpanderView>
+                                <uranium:ExpanderView VerticalOptions="Start">
                                     <uranium:ExpanderView.Header>
-                                        <Frame HeightRequest="200">
-                                            <!--<Frame.GestureRecognizers>
+                                        <Border HeightRequest="200">
+                                            <Border.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfileViewModel}}, Path=GoToDetailsCommand}" 
-                                                          CommandParameter="{Binding Id}"/>
-                                            </Frame.GestureRecognizers>-->
+                                                              CommandParameter="{Binding Id}"/>
+                                            </Border.GestureRecognizers>
                                             <Grid Padding="0" ColumnDefinitions="120,*">
-                                                <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="200" HeightRequest="200"/>
+                                                <Image Grid.Column="0" Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="120" HeightRequest="200"/>
+
                                                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
-                                                    <Label Text="{Binding Name}" FontSize="16" />
+                                                    <Label Text="{Binding Name}" FontSize="16" LineBreakMode="WordWrap"/>
                                                     <HorizontalStackLayout>
                                                         <Image WidthRequest="16" HeightRequest="16">
                                                             <Image.Source>
                                                                 <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Corporate_fare}"/>
                                                             </Image.Source>
                                                         </Image>
-                                                        <Label Text="{Binding Organization.Name}" Padding="5"/>
+                                                        <Label Text="{Binding Organization.Name}" Padding="5" LineBreakMode="WordWrap" FontSize="12"/>
                                                     </HorizontalStackLayout>
                                                     <HorizontalStackLayout>
                                                         <Image WidthRequest="16" HeightRequest="16">
@@ -95,38 +97,40 @@
                                                             </Image.Source>
                                                         </Image>
                                                         <HorizontalStackLayout>
-                                                            <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Padding="5"/>
-                                                            <Label Text="{Binding EndTime, StringFormat='{0:d}'}" Padding="5"/>
+                                                            <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Padding="5" LineBreakMode="WordWrap"/>
+                                                            <Label Text="-" />
+                                                            <Label Text="{Binding EndTime, StringFormat='{0:d}'}" Padding="5" LineBreakMode="WordWrap"/>
                                                         </HorizontalStackLayout>
                                                     </HorizontalStackLayout>
                                                 </VerticalStackLayout>
                                             </Grid>
-                                        </Frame>
+                                        </Border>
                                     </uranium:ExpanderView.Header>
-                                
-                                        <CollectionView ItemsSource="{Binding Tasks}" SelectionMode="None">
-                                            <CollectionView.ItemsLayout>
-                                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
-                                            </CollectionView.ItemsLayout>
 
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Label Text="{Binding Name}" />
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
-                       
+                                    <CollectionView ItemsSource="{Binding Tasks}" SelectionMode="None">
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                                        </CollectionView.ItemsLayout>
+
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
                                 </uranium:ExpanderView>
                             </Grid>
-              
+
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
 
                 </CollectionView>
             </ContentView>
-        </RefreshView>
 
 
-    </StackLayout>
-    
+        </StackLayout>
+
+    </ScrollView>
+
 </ContentPage>

@@ -10,4 +10,9 @@ public partial class LoginPage : ContentPage
 
 		BindingContext = viewModel;
 	}
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+    }
 }

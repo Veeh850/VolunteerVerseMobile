@@ -144,8 +144,9 @@
 
                                         </HorizontalStackLayout>
 
-                                        <Button Text="{Binding Source={RelativeSource AncestorType={x:Type model:TaskDetailsForEvents}}, Converter={StaticResource taskButtonCoverter}, ConverterParameter={Binding}}"
+                                        <Button Text="{Binding Source={RelativeSource AncestorType={x:Type model:TaskDetailsForEvents}}, Converter={StaticResource taskButtonCoverter}, ConverterParameter={Binding }}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EventDetailsViewModel}}, Path=TaskButtonClickedCommand}"
+                                                CommandParameter="{Binding }"
                                                 StyleClass="FilledButton" HorizontalOptions="End" VerticalOptions="End" Margin="0,0,20,0"/>
 
                                     </StackLayout>

@@ -9,58 +9,89 @@
              xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              x:DataType="viewmodel:EventListViewModel"
-             Title="EventList"
+             Title="Events"
              Appearing="EventListPage_Appearing">
+
     <ScrollView>
         <VerticalStackLayout>
-        <!--<SearchBar Text="{Binding Searchtext}" SearchCommand="{Binding LoadEventListCommand}"/>-->
-        <ImageButton Clicked="ShowBottomSheet" WidthRequest="100">
-            <ImageButton.Source>
-                <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Filter_alt}"/>
-            </ImageButton.Source>
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-        </ImageButton>
-        <RefreshView>
-                <ContentView>
-                    <CollectionView ItemsSource="{Binding EventPreviews}" SelectionMode="None">
+                <SearchBar Text="{Binding Searchtext}" SearchCommand="{Binding SearchBarCommand}" Grid.Column="0" Margin="0,0,10,0"/>
 
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                        </CollectionView.ItemsLayout>
+                <ImageButton Clicked="ShowBottomSheet" WidthRequest="100" HorizontalOptions="End" Grid.Column="1">
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Filter_alt}"/>
+                    </ImageButton.Source>
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="model:EventPreview">
-                                <Grid Padding="10">
-                                    <Frame HeightRequest="125">
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EventListViewModel}}, Path=GoToDetailsCommand}" 
-                                                       CommandParameter="{Binding Id}"/>
-                                        </Frame.GestureRecognizers>
-                                        <Grid Padding="0" ColumnDefinitions="125,*">
-                                            <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
-                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
-                                                <Label Text="{Binding Name}" />
-                                                <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
+                </ImageButton>
 
-                                            </VerticalStackLayout>
-                                        </Grid>
+            </Grid>
+            <ContentView>
+                <CollectionView ItemsSource="{Binding EventPreviews}" SelectionMode="None">
 
-                                    </Frame>
-                                </Grid>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
 
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:EventPreview">
+                            <Grid Padding="10">
+                                <Border HeightRequest="125" 
+                                         Stroke="{StaticResource Gray600}"
+                                         StrokeThickness="2"
+                                         BackgroundColor="{StaticResource Gray600}"
+                                         Padding="10"
+                                         StrokeShape="RoundRectangle 30">
+                                    <Border.GestureRecognizers>
+
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EventListViewModel}}, Path=GoToDetailsCommand}" 
+                                                              CommandParameter="{Binding Id}"/>
+                                    </Border.GestureRecognizers>
+                                    <Grid Padding="0" ColumnDefinitions="125,*">
+                                        <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
+
+                                        </VerticalStackLayout>
+                                    </Grid>
+
+                                </Border>
+                            </Grid>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
 
 
-                    </CollectionView>
-                </ContentView>
-            </RefreshView>
-       
-    </VerticalStackLayout>
+                </CollectionView>
+            </ContentView>
+        </VerticalStackLayout>
+
     </ScrollView>
 
     <uranium:UraniumContentPage.Attachments>
-        <material:BottomSheetView x:Name="myBottomSheet" DisablePageWhenOpened="False" CloseOnTapOutside="True" HeightRequest="500">
+            <material:BottomSheetView x:Name="myBottomSheet" DisablePageWhenOpened="False" CloseOnTapOutside="True" HeightRequest="500">
+
+                <VerticalStackLayout>
+                    <Grid Margin="10" RowSpacing="20" ColumnSpacing="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
             <VerticalStackLayout Padding="20">
                 <Label Text="Filter by:" HorizontalOptions="Center" FontSize="18" Margin="0,0,0,20"/>
@@ -96,10 +127,8 @@
                     <Button StyleClass="FilledButton" Text="Search"  WidthRequest="100" Clicked="SearchBy_Filter"/>
                 </FlexLayout>
 
-            </VerticalStackLayout>
-            
+            </material:BottomSheetView>
+        </uranium:UraniumContentPage.Attachments>
 
-        </material:BottomSheetView>
-    </uranium:UraniumContentPage.Attachments>
 
 </uranium:UraniumContentPage>

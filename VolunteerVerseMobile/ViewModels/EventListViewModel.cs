@@ -68,15 +68,24 @@ namespace VolunteerVerseMobile.ViewModels
                     EventPreviews.Add(item);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                Debug.WriteLine("Error");
+                await Shell.Current.DisplayAlert("Error",
+                        ex.Message, "OK");
             }
             finally
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        public async Task SearchBar()
+        {
+            EventFilter = new EventFilter(Searchtext);
+
+            await LoadEventList();
         }
 
         [RelayCommand]

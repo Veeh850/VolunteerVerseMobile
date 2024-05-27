@@ -77,9 +77,10 @@ namespace VolunteerVerseMobile.ViewModels
                     ProfileEvents.Add(item);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Debug.WriteLine("Error");
+                await Shell.Current.DisplayAlert("Error",
+                        ex.Message, "OK");
             }
             finally
             {
@@ -96,12 +97,19 @@ namespace VolunteerVerseMobile.ViewModels
             });
         }
 
+        [RelayCommand]
+        public async Task GoToLogin()
+        {
+
+            await Shell.Current.Navigation.PopToRootAsync();
+
+            await Shell.Current.GoToAsync(nameof(LoginPage));
+        }
+
         public override async Task OnAppearing()
         {
             if(string.IsNullOrEmpty(AccountContext.Token))
             {
-                await Shell.Current.Navigation.PopAsync();
-
                 return;
             }
 

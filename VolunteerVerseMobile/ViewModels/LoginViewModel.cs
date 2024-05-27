@@ -19,18 +19,32 @@ namespace VolunteerVerseMobile.ViewModels
         [ObservableProperty]
         private string _error;
 
-        private IAuthorizationApiService _authorizationApiService;
+        private readonly IAuthorizationApiService _authorizationApiService;
+
+        private readonly IConnectivity _connectivity;
 
 
-        public LoginViewModel(IAuthorizationApiService authorizationApiService)
+        public LoginViewModel(IAuthorizationApiService authorizationApiService, IConnectivity connectivity)
         {
             _authorizationApiService = authorizationApiService;
+
+            _connectivity = connectivity;
         }
 
         [RelayCommand]
         public async Task Login()
         {
-            if(string.IsNullOrWhiteSpace(EmailAddress) || string.IsNullOrWhiteSpace(Password))
+            if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("No connectivity!",
+                    $"Please check internet and try again.", "OK");
+
+                return;
+
+            }
+
+
+            if (string.IsNullOrWhiteSpace(EmailAddress) || string.IsNullOrWhiteSpace(Password))
             {
                 return;
             }
@@ -56,6 +70,8 @@ namespace VolunteerVerseMobile.ViewModels
 
                 await Shell.Current.GoToAsync("//main/EventListPage", true);
 
+                await Shell.Current.Navigation.PopToRootAsync();
+
             }
             catch (Exception ex)
             {
@@ -73,6 +89,15 @@ namespace VolunteerVerseMobile.ViewModels
         [RelayCommand]
         public async Task ContinueWithoutLogin()
         {
+            if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("No connectivity!",
+                    $"Please check internet and try again.", "OK");
+
+                return;
+
+            }
+
             AccountContext.Email = string.Empty;
             AccountContext.PictureUri = string.Empty;
             AccountContext.FirstName = string.Empty;
@@ -81,6 +106,8 @@ namespace VolunteerVerseMobile.ViewModels
 
             //await Shell.Current.GoToAsync($"{nameof(EventListPage)}", true);
             await Shell.Current.GoToAsync("//main/EventListPage", true);
+
+            await Shell.Current.Navigation.PopToRootAsync();
         }
 
 

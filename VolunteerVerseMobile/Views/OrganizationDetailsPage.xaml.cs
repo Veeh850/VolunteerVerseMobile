@@ -18,4 +18,6 @@ public partial class OrganizationDetailsPage : ContentPage
     {
         await _viewModel.OnAppearing();
     }
+
+   
 }

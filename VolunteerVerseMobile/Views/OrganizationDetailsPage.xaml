@@ -5,9 +5,15 @@
              xmlns:model="clr-namespace:VolunteerVerseMobile.Models"
              xmlns:viewmodel="clr-namespace:VolunteerVerseMobile.ViewModels"
              x:DataType="viewmodel:OrganizationDetailsViewModel"
+             xmlns:converters="clr-namespace:VolunteerVerseMobile.Utils.Converters"
              xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
              Title="OrganizationDetailsPage"
              Appearing="OrganizationDetailsPage_Appearing">
+
+    <ContentPage.Resources>
+        <converters:RoleToVisibilityConverter x:Key="roleToVisibilityConverter" />
+    </ContentPage.Resources>
+
     <RefreshView>
         <ScrollView>
             <VerticalStackLayout Padding="20">
@@ -74,8 +80,15 @@
                     </CollectionView>
                 </ContentView>
 
-                <Label Text="Members" FontSize="Medium" Margin="0, 30,0,0"/>
+                <FlexLayout JustifyContent="SpaceBetween" Margin="0, 30,0,0" >
+                    <Label Text="Members" FontSize="Medium" />
+                    <ImageButton  WidthRequest="100">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Add}"/>
+                        </ImageButton.Source>
 
+                    </ImageButton>
+                </FlexLayout>
 
                 <ContentView>
                     <CollectionView ItemsSource="{Binding OrganizationDetails.OrganizationUsers}" SelectionMode="None"  ItemsLayout="HorizontalList">
@@ -113,7 +126,29 @@
 
                     </CollectionView>
                 </ContentView>
+
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Button StyleClass="FilledTonalButton" Text="Delete" Margin="5" IsVisible="{Binding OrganizationDetails.RoleInOrganization,
+                            Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter=3}"
+                            Command="{Binding DeleteButtonClickedCommand}"/>
+                    
+                    <Button StyleClass="FilledButton" Text="Leave" Margin="5" IsVisible="{Binding OrganizationDetails.RoleInOrganization, 
+                            Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter=0}"
+                            Command="{Binding LeaveButtonClickedCommand}"/>
+                </HorizontalStackLayout>
+
+                
             </VerticalStackLayout>
         </ScrollView>
     </RefreshView>
+    <!--<Grid x:Name="AddMemberModal" IsVisible="{Binding IsAddMemberModalVisible}" BackgroundColor="#80000000">
+        <VerticalStackLayout Padding="20" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label Text="Add Member" FontSize="Large" Margin="0,0,0,10"/>
+            <Entry Text="{Binding NewMemberEmail}" Placeholder="Enter email" />
+            <HorizontalStackLayout HorizontalOptions="End" Margin="0,10,0,0">
+                <Button Text="Cancel" Command="{Binding HideAddMemberModalCommand}"/>
+                <Button Text="Save" Command="{Binding AddMemberCommand}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>-->
 </ContentPage>

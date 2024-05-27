@@ -12,5 +12,11 @@ namespace VolunteerVerseMobile.Interfaces
         public Task<List<OrganizationPreview>> GetAllOrganizationPreviews();
 
         public Task<OrganizationDetails> GetOrganizationDetailsById(int id);
+
+        public Task LeaveOrganization(int orgId);
+
+        public Task DeleteOrganization(int orgId);
+
+        public Task AddOrganizationMember(int orgId, string email);
     }
 }

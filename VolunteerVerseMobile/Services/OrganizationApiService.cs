@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -21,6 +22,7 @@ namespace VolunteerVerseMobile.Services
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccountContext.Token);
         }
+
 
         public async Task<List<OrganizationPreview>> GetAllOrganizationPreviews()
         {
@@ -68,6 +70,51 @@ namespace VolunteerVerseMobile.Services
             }
 
             return await response.Content.ReadFromJsonAsync<OrganizationDetails>();
+        }
+
+        public async Task LeaveOrganization(int orgId)
+        {
+            var response = await _httpClient.DeleteAsync($"{Constants.OrganizationUrl}/{orgId}/account");
+
+            if (response.IsSuccessStatusCode == false)
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponseDTO>();
+
+                if (errorResponse != null && errorResponse.Errors.Count != 0)
+                {
+                    throw new Exception(errorResponse.Errors[0]);
+                }
+            }
+        }
+
+        public async Task DeleteOrganization(int orgId)
+        {
+            var response = await _httpClient.DeleteAsync($"{Constants.OrganizationUrl}/{orgId}");
+
+            if (response.IsSuccessStatusCode == false)
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponseDTO>();
+
+                if (errorResponse != null && errorResponse.Errors.Count != 0)
+                {
+                    throw new Exception(errorResponse.Errors[0]);
+                }
+            }
+        }
+
+        public async Task AddOrganizationMember(int orgId, string email)
+        {
+            var response = await _httpClient.PostAsync($"{Constants.OrganizationUrl}/{orgId}/account", new StringContent(""));
+
+            if (response.IsSuccessStatusCode == false)
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponseDTO>();
+
+                if (errorResponse != null && errorResponse.Errors.Count != 0)
+                {
+                    throw new Exception(errorResponse.Errors[0]);
+                }
+            }
         }
     }
 }

@@ -73,7 +73,7 @@ namespace VolunteerVerseMobile.Services
             return await response.Content.ReadFromJsonAsync<List<EventPreview>>();
         }
 
-        public  async Task<EventDetails> GetEventDetailsById(int id)
+        public async Task<EventDetails> GetEventDetailsById(int id)
         {
 
             if (string.IsNullOrEmpty(AccountContext.Token) == false)

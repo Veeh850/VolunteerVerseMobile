@@ -93,32 +93,39 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Text="Name:" Grid.Row="0" Grid.Column="0" WidthRequest="90" Margin="0,10"/>
-                        <Entry Text="{Binding EventFilter.Name}" Grid.Row="0" Grid.Column="1"/>
+            <VerticalStackLayout Padding="20">
+                <Label Text="Filter by:" HorizontalOptions="Center" FontSize="18" Margin="0,0,0,20"/>
+                <material:TextField Title="Name" Text="{Binding EventFilter.Name}" Margin="0,0,0,10"/>
+                <material:TextField Title="Organization" Text="{Binding EventFilter.OrganizationName}" Margin="0,0,0,10"/>
+                <material:TextField Title="Location" Text="{Binding EventFilter.Location}" Margin="0,0,0,10"/>
 
-                        <Label Text="Organization:" Grid.Row="1" Grid.Column="0" WidthRequest="90" Margin="0,10"/>
-                        <Entry Text="{Binding EventFilter.OrganizationName}" Grid.Row="1" Grid.Column="1"/>
+                <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                        <Label Text="Location:" Grid.Row="2" Grid.Column="0" WidthRequest="90" Margin="0,10"/>
-                        <Entry Text="{Binding EventFilter.Location}" Grid.Row="2" Grid.Column="1"/>
+                    <material:DatePickerField Title="Start Date" Date="{Binding EventFilter.StartDate}" Grid.Column="0" HorizontalOptions="FillAndExpand"/>
+                    <material:DatePickerField Title="End Date" Date="{Binding EventFilter.EndDate}" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
+                </Grid>
 
-                        <Label Text="Start Date:" Grid.Row="3" Grid.Column="0" WidthRequest="90" Margin="0,20"/>
-                        <material:DatePickerField Date="{Binding EventFilter.StartDate}"  Grid.Row="3" Grid.Column="1" WidthRequest="200"/>
+                <material:MultiplePickerField Title="Pick some options" Margin="0,0,0,30">
+                    <material:MultiplePickerField.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Adaptibilty</x:String>
+                            <x:String>Driving</x:String>
+                            <x:String>Empathy</x:String>
+                            <x:String>Time management</x:String>
+                            <x:String>Leadership</x:String>
+                            <x:String>Good with kids</x:String>
+                        </x:Array>
+                    </material:MultiplePickerField.ItemsSource>
+                </material:MultiplePickerField>
 
-                        <Label Text="End Date:" Grid.Row="4" Grid.Column="0" WidthRequest="90" Margin="0,20"/>
-                        <material:DatePickerField Date="{Binding EventFilter.EndDate}"  Grid.Row="4" Grid.Column="1" WidthRequest="200" />
-
-                    </Grid>
-
-                    <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-
-                        <Button Text="Reset" WidthRequest="100" Command="{Binding ResetEventFilterCommand}"/>
-                        <Button Text="Search"  WidthRequest="100" Clicked="SearchBy_Filter"/>
-
-                    </HorizontalStackLayout>
-
-                </VerticalStackLayout>
-
+                <FlexLayout JustifyContent="Center" Wrap="Wrap">
+                    <Button StyleClass="OutlinedButton" Text="Reset" WidthRequest="100" Command="{Binding ResetEventFilterCommand}" Margin="0,0,5,0"/>
+                    <Button StyleClass="FilledButton" Text="Search"  WidthRequest="100" Clicked="SearchBy_Filter"/>
+                </FlexLayout>
 
             </material:BottomSheetView>
         </uranium:UraniumContentPage.Attachments>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VolunteerVerseMobile.Views.OrganizationDetailsPage"
+             xmlns:model="clr-namespace:VolunteerVerseMobile.Models"
+             xmlns:viewmodel="clr-namespace:VolunteerVerseMobile.ViewModels"
+             x:DataType="viewmodel:OrganizationDetailsViewModel"
+             xmlns:converters="clr-namespace:VolunteerVerseMobile.Utils.Converters"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             Title="OrganizationDetailsPage"
+             Appearing="OrganizationDetailsPage_Appearing">
+
+    <ContentPage.Resources>
+        <converters:RoleToVisibilityConverter x:Key="roleToVisibilityConverter" />
+    </ContentPage.Resources>
+
+    <RefreshView>
+        <ScrollView>
+            <VerticalStackLayout Padding="20">
+
+                <Frame CornerRadius="100" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="150" HeightRequest="150">
+                    <Image Source="{Binding OrganizationDetails.ImageUri}" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="Center"
+                           WidthRequest="150" HeightRequest="150"/>
+                </Frame>
+              
+                <Label Text="{Binding OrganizationDetails.Name}" HorizontalTextAlignment="Center" FontSize="Medium" Padding="15"/>
+
+                <HorizontalStackLayout Margin="0,0,0,10">
+                    <Image WidthRequest="16" HeightRequest="16">
+                        <Image.Source>
+                            <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Star}"/>
+                        </Image.Source>
+                    </Image>
+                    <Label Text="{Binding OrganizationDetails.Rating, StringFormat='{0} / 5'}" Padding="5"/>
+                </HorizontalStackLayout>
+
+                <Frame CornerRadius="15" BackgroundColor="{StaticResource Gray600}" Margin="0,0,0,10">
+                    <VerticalStackLayout>
+                        <Label Text="Avaibility" HorizontalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Margin="0,0,0,10"/>
+                        <Label Text="{Binding OrganizationDetails.Availability}" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="15" BackgroundColor="{StaticResource Gray600}" Margin="0,0,0,30">
+                    <VerticalStackLayout>
+                        <Label Text="Description" HorizontalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Margin="0,0,0,10"/>
+                        <Label Text="{Binding OrganizationDetails.Description}" HorizontalTextAlignment="Start" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Label Text="Events" FontSize="Medium"/>
+
+
+                <ContentView>
+                    <CollectionView ItemsSource="{Binding OrganizationDetails.EventPreviews}" SelectionMode="None"  ItemsLayout="HorizontalList">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:EventPreview">
+                                <Grid Padding="0, 10, 10, 10">
+                                    <Frame HeightRequest="180" WidthRequest="250">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrganizationDetailsViewModel}}, Path=GoToDetailsCommand}" 
+                                                                    CommandParameter="{Binding Id}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid Padding="0" RowDefinitions="80, 40, *">
+                                            <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="200" HeightRequest="200"/>
+                                          
+                                             <Label Text="{Binding Name}" Grid.Row="1" HorizontalOptions="Center" FontAttributes="Bold" FontSize="16"/>
+                                             <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Grid.Row="2" HorizontalOptions="Center"/>
+
+                                        </Grid>
+
+                                    </Frame>
+                                </Grid>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+
+                    </CollectionView>
+                </ContentView>
+
+                <FlexLayout JustifyContent="SpaceBetween" Margin="0, 30,0,0" >
+                    <Label Text="Members" FontSize="Medium" />
+                    <ImageButton  WidthRequest="100">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Add}"/>
+                        </ImageButton.Source>
+
+                    </ImageButton>
+                </FlexLayout>
+
+                <ContentView>
+                    <CollectionView ItemsSource="{Binding OrganizationDetails.OrganizationUsers}" SelectionMode="None"  ItemsLayout="HorizontalList">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:OrganizationUser">
+                                <Grid Padding="0, 10, 10, 10">
+                                    <Frame HeightRequest="150" WidthRequest="250">
+                                        <Grid Padding="0" RowDefinitions="*, 40, *, *">
+                                            <Frame CornerRadius="100" 
+                                                   HorizontalOptions="Center" VerticalOptions="Center"
+                                                   WidthRequest="50" HeightRequest="50" Grid.Row="0">
+
+                                                <Image Source="{Binding ProfilePicture}" 
+                                                       Aspect="AspectFill" 
+                                                       HorizontalOptions="Center" VerticalOptions="Center"
+                                                       WidthRequest="150" HeightRequest="150"/>         
+                                            </Frame>
+
+                                            <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,10" Grid.Row="1">
+                                                <Label Text="{Binding FirstName}"/>
+                                                <Label Text="{Binding LastName}" Margin="5,0,0,0" />
+                                            </HorizontalStackLayout>
+
+                                            <Label Text="{Binding Email}" Grid.Row="2" HorizontalOptions="Center" />
+                                            <Label Text="{Binding Phone}" Grid.Row="3" HorizontalOptions="Center" />
+                                        </Grid>
+
+                                    </Frame>
+                                </Grid>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+
+                    </CollectionView>
+                </ContentView>
+
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Button StyleClass="FilledTonalButton" Text="Delete" Margin="5" IsVisible="{Binding OrganizationDetails.RoleInOrganization,
+                            Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter=3}"
+                            Command="{Binding DeleteButtonClickedCommand}"/>
+                    
+                    <Button StyleClass="FilledButton" Text="Leave" Margin="5" IsVisible="{Binding OrganizationDetails.RoleInOrganization, 
+                            Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter=0}"
+                            Command="{Binding LeaveButtonClickedCommand}"/>
+                </HorizontalStackLayout>
+
+                
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+    <!--<Grid x:Name="AddMemberModal" IsVisible="{Binding IsAddMemberModalVisible}" BackgroundColor="#80000000">
+        <VerticalStackLayout Padding="20" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label Text="Add Member" FontSize="Large" Margin="0,0,0,10"/>
+            <Entry Text="{Binding NewMemberEmail}" Placeholder="Enter email" />
+            <HorizontalStackLayout HorizontalOptions="End" Margin="0,10,0,0">
+                <Button Text="Cancel" Command="{Binding HideAddMemberModalCommand}"/>
+                <Button Text="Save" Command="{Binding AddMemberCommand}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>-->
+</ContentPage>

@@ -43,7 +43,15 @@
                 <Button StyleClass="FilledButton" Text="Login" Command="{Binding LoginCommand}"/>
                 <Label Text="{Binding Error}" TextColor="Red" HorizontalOptions="Center" Padding="10"/>
 
-                <Button StyleClass="OutlinedButton" Text="Continue without Login" Command="{Binding ContinueWithoutLoginCommand}"/>
+
+                <BoxView StyleClass="Divider" />
+
+                <FlexLayout JustifyContent="SpaceEvenly">
+                    <Button StyleClass="TextButton" Text="Continue without Login" Command="{Binding ContinueWithoutLoginCommand}"/>
+                    <Label Text="or"  VerticalOptions="Center"/>
+                    <Button StyleClass="TextButton" Text="Sign up" Command="{Binding }"/>
+                </FlexLayout>
+               
             </StackLayout>
 
         </Border>

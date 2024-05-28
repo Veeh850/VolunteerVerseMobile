@@ -14,6 +14,8 @@ namespace VolunteerVerseMobile.Models
 
         public string Description { get; set; } = string.Empty;
 
+        public OrganizationPreview Organization { get; set; }
+
         public string Location { get; set; } = string.Empty;
 
         public DateTime StartTime { get; set; }

@@ -14,7 +14,7 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            <Grid Padding="15">
+            <Grid Padding="5,5,5,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -22,9 +22,9 @@
 
                 <SearchBar Text="{Binding Searchtext}" SearchCommand="{Binding SearchBarCommand}" Grid.Column="0" Margin="0,0,10,0"/>
 
-                <ImageButton Clicked="ShowBottomSheet" WidthRequest="100" HorizontalOptions="End" Grid.Column="1">
+                <ImageButton Clicked="ShowBottomSheet" WidthRequest="32" HeightRequest="32" HorizontalOptions="End" Grid.Column="1">
                     <ImageButton.Source>
-                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Filter_alt}"/>
+                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Tune}"/>
                     </ImageButton.Source>
 
                 </ImageButton>
@@ -55,10 +55,27 @@
                                              <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
                                         </Border>
                                        
-                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="30,10,0,0">
-                                            <Label Text="{Binding Name}" FontSize="18" Padding="0,0,0,8"/>
-                                            <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="20,10,0,0">
+                                            <Label Text="{Binding Name}" FontSize="18" Padding="0,0,0,8" LineBreakMode="WordWrap"/>
+                                            <HorizontalStackLayout>
+                                                <Image WidthRequest="16" HeightRequest="16">
+                                                    <Image.Source>
+                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Corporate_fare}"/>
+                                                    </Image.Source>
+                                                </Image>
+                                                <Label Text="{Binding Organization.Name}" Padding="5" LineBreakMode="WordWrap" FontSize="14"/>
+                                            </HorizontalStackLayout>
 
+                                            <HorizontalStackLayout>
+                                                <Image WidthRequest="16" HeightRequest="16">
+                                                    <Image.Source>
+                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Schedule}"/>
+                                                    </Image.Source>
+                                                </Image>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Padding="5" LineBreakMode="WordWrap"/>
+                                                </HorizontalStackLayout>
+                                            </HorizontalStackLayout>
                                         </VerticalStackLayout>
                                     </Grid>
 
@@ -84,7 +101,7 @@
                 <material:TextField Title="Organization" Text="{Binding EventFilter.OrganizationName}" Margin="0,0,0,10"/>
                 <material:TextField Title="Location" Text="{Binding EventFilter.Location}" Margin="0,0,0,10"/>
 
-                <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10" Margin="0,0,0,10">
+                <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10" Margin="0,0,0,40">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -94,18 +111,6 @@
                     <material:DatePickerField Title="End Date" Date="{Binding EventFilter.EndDate}" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
                 </Grid>
 
-                <material:MultiplePickerField Title="Pick some options" Margin="0,0,0,30">
-                    <material:MultiplePickerField.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Adaptibilty</x:String>
-                            <x:String>Driving</x:String>
-                            <x:String>Empathy</x:String>
-                            <x:String>Time management</x:String>
-                            <x:String>Leadership</x:String>
-                            <x:String>Good with kids</x:String>
-                        </x:Array>
-                    </material:MultiplePickerField.ItemsSource>
-                </material:MultiplePickerField>
 
                 <FlexLayout JustifyContent="Center" Wrap="Wrap">
                     <Button StyleClass="OutlinedButton" Text="Reset" WidthRequest="100" Command="{Binding ResetEventFilterCommand}" Margin="0,0,5,0"/>

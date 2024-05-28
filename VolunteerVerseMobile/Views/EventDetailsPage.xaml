@@ -141,7 +141,7 @@
                                             </Image.Source>
                                         </Image>
 
-                                        <Label Text="{Binding Name}" Margin="10,10" FontSize="16"/>
+                                        <Label Text="{Binding Name}" Margin="10,10" FontSize="16" LineBreakMode="WordWrap"/>
 
                                     </HorizontalStackLayout>
 

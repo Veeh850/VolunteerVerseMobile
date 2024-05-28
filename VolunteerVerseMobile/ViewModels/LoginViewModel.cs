@@ -110,6 +110,12 @@ namespace VolunteerVerseMobile.ViewModels
             await Shell.Current.Navigation.PopToRootAsync();
         }
 
+        [RelayCommand]
+        public async Task GoToSignupPage()
+        {
+            await Shell.Current.GoToAsync("SignupPage");
+        }
+
 
 
 

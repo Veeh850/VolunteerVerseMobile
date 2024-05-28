@@ -39,12 +39,11 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:EventPreview">
-                            <Grid Padding="15,0,15,0">
+                            <Grid Padding="15,0,10,0">
                                 <Border HeightRequest="125" 
                                          Stroke="{StaticResource Gray600}"
                                          StrokeThickness="2"
                                          BackgroundColor="{StaticResource Gray600}"
-                                         Padding="10,0,10,0"
                                          StrokeShape="RoundRectangle 15">
                                     <Border.GestureRecognizers>
 
@@ -52,8 +51,11 @@
                                                               CommandParameter="{Binding Id}"/>
                                     </Border.GestureRecognizers>
                                     <Grid Padding="0" ColumnDefinitions="125,*">
-                                        <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
-                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10,10,0,0">
+                                        <Border StrokeShape="RoundRectangle 15">
+                                             <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
+                                        </Border>
+                                       
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="30,10,0,0">
                                             <Label Text="{Binding Name}" FontSize="18" Padding="0,0,0,8"/>
                                             <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
 

@@ -17,10 +17,10 @@
         <ScrollView>
             <VerticalStackLayout Padding="20">
 
-                <Frame CornerRadius="100" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="150" HeightRequest="150">
+                <Border StrokeShape="RoundRectangle 80"  HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="150" HeightRequest="150">
                     <Image Source="{Binding OrganizationDetails.ImageUri}" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="Center"
                            WidthRequest="150" HeightRequest="150"/>
-                </Frame>
+                </Border>
               
                 <Label Text="{Binding OrganizationDetails.Name}" HorizontalTextAlignment="Center" FontSize="Medium" Padding="15"/>
 
@@ -33,19 +33,19 @@
                     <Label Text="{Binding OrganizationDetails.Rating, StringFormat='{0} / 5'}" Padding="5"/>
                 </HorizontalStackLayout>
 
-                <Frame CornerRadius="15" BackgroundColor="{StaticResource Gray600}" Margin="0,0,0,10">
-                    <VerticalStackLayout>
+                <Border StrokeShape="RoundRectangle 15" BackgroundColor="{StaticResource Gray600}" Margin="0,0,0,10">
+                    <VerticalStackLayout Padding="15">
                         <Label Text="Avaibility" HorizontalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Margin="0,0,0,10"/>
                         <Label Text="{Binding OrganizationDetails.Availability}" HorizontalTextAlignment="Center" />
                     </VerticalStackLayout>
-                </Frame>
+                </Border>
 
-                <Frame CornerRadius="15" BackgroundColor="{StaticResource Gray600}" Margin="0,0,0,30">
-                    <VerticalStackLayout>
+                 <Border StrokeShape="RoundRectangle 15" BackgroundColor="{StaticResource Gray600}" Margin="0,0,0,30">
+                <VerticalStackLayout Padding="15">
                         <Label Text="Description" HorizontalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Margin="0,0,0,10"/>
                         <Label Text="{Binding OrganizationDetails.Description}" HorizontalTextAlignment="Start" />
                     </VerticalStackLayout>
-                </Frame>
+                </Border>
 
                 <Label Text="Events" FontSize="Medium"/>
 
@@ -55,24 +55,28 @@
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:EventPreview">
-                                <Grid Padding="0, 10, 10, 10">
-                                    <Frame HeightRequest="180" WidthRequest="250">
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrganizationDetailsViewModel}}, Path=GoToDetailsCommand}" 
+                            <Grid Padding="0,0,15,0">
+                                <Border HeightRequest="160" 
+                                         Stroke="{StaticResource Gray600}"
+                                         StrokeThickness="2"
+                                         BackgroundColor="{StaticResource Gray600}"
+                                         StrokeShape="RoundRectangle 15">
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrganizationDetailsViewModel}}, Path=GoToDetailsCommand}" 
                                                                     CommandParameter="{Binding Id}"/>
-                                        </Frame.GestureRecognizers>
-                                        <Grid Padding="0" RowDefinitions="80, 40, *">
-                                            <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="200" HeightRequest="200"/>
+                                            </Border.GestureRecognizers>
+                                                
+                                        <VerticalStackLayout Padding="0">
+                                            <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="250" HeightRequest="80"/>
                                           
-                                             <Label Text="{Binding Name}" Grid.Row="1" HorizontalOptions="Center" FontAttributes="Bold" FontSize="16"/>
-                                             <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Grid.Row="2" HorizontalOptions="Center"/>
+                                             <Label Text="{Binding Name}" HorizontalOptions="Center" FontAttributes="Bold" FontSize="16" Padding="0,10,0,10"/>
+                                             <Label Text="{Binding StartTime, StringFormat='{0:d}'}" HorizontalOptions="Center"/>
 
-                                        </Grid>
+                                        </VerticalStackLayout>
 
-                                    </Frame>
-                                </Grid>
-
-                            </DataTemplate>
+                                    </Border>
+                            </Grid>
+                        </DataTemplate>
                         </CollectionView.ItemTemplate>
 
 
@@ -92,38 +96,39 @@
                 <ContentView>
                     <CollectionView ItemsSource="{Binding OrganizationDetails.OrganizationUsers}" SelectionMode="None"  ItemsLayout="HorizontalList">
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="model:OrganizationUser">
-                                <Grid Padding="0, 10, 10, 10">
-                                    <Frame HeightRequest="150" WidthRequest="250">
-                                        <Grid Padding="0" RowDefinitions="*, 40, *, *">
-                                            <Frame CornerRadius="100" 
-                                                   HorizontalOptions="Center" VerticalOptions="Center"
-                                                   WidthRequest="50" HeightRequest="50" Grid.Row="0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:OrganizationUser">
+                            <Grid Padding="0, 10, 15, 10">
+                                <Border HeightRequest="150" WidthRequest="250"
+                                             Stroke="{StaticResource Gray600}"
+                                             StrokeThickness="2"
+                                             BackgroundColor="{StaticResource Gray600}"
+                                             StrokeShape="RoundRectangle 15">
+                                    <VerticalStackLayout Padding="0,5,0,0">
+                                        
+                                        <Border StrokeShape="RoundRectangle 80" 
+                                                HorizontalOptions="Center" VerticalOptions="Center"
+                                                WidthRequest="55" HeightRequest="55" BackgroundColor="{StaticResource Gray500}">
 
-                                                <Image Source="{Binding ProfilePicture}" 
-                                                       Aspect="AspectFill" 
-                                                       HorizontalOptions="Center" VerticalOptions="Center"
-                                                       WidthRequest="150" HeightRequest="150"/>         
-                                            </Frame>
+                                            <Image Source="{Binding ProfilePicture}" 
+                                                        Aspect="AspectFill" 
+                                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                                        WidthRequest="50" HeightRequest="50"/>
+                                        </Border>
 
-                                            <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,10" Grid.Row="1">
-                                                <Label Text="{Binding FirstName}"/>
-                                                <Label Text="{Binding LastName}" Margin="5,0,0,0" />
-                                            </HorizontalStackLayout>
+                                        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,5">
+                                            <Label Text="{Binding FirstName}" FontSize="16"/>
+                                            <Label Text="{Binding LastName}" Margin="5,0,0,0" FontSize="16"/>
+                                        </HorizontalStackLayout>
 
-                                            <Label Text="{Binding Email}" Grid.Row="2" HorizontalOptions="Center" />
-                                            <Label Text="{Binding Phone}" Grid.Row="3" HorizontalOptions="Center" />
-                                        </Grid>
-
-                                    </Frame>
-                                </Grid>
-
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-
-
-                    </CollectionView>
+                                        <Label Text="{Binding Email}" HorizontalOptions="Center" Padding="5"/>
+                                        <Label Text="{Binding Phone}" HorizontalOptions="Center" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
                 </ContentView>
 
                 <HorizontalStackLayout HorizontalOptions="Center">

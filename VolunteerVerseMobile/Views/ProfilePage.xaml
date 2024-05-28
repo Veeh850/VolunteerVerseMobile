@@ -14,7 +14,7 @@
 
         <StackLayout>
 
-            <StackLayout VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Spacing="40" Padding="20" Margin="0,180" x:Name="LoginSection">
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="40" Padding="15,0,15,0" Margin="0,180" x:Name="LoginSection">
 
                 <Label Text="You are not logged in. Please log in to access your profile."
                     FontSize="18"
@@ -27,16 +27,17 @@
             <StackLayout x:Name="ProfileSection">
 
 
-                <Frame CornerRadius="100" 
+                <Border 
                        HorizontalOptions="Center" VerticalOptions="Center"
                        Margin="0, 20, 0, 0"
-                       WidthRequest="150" HeightRequest="150">
+                       WidthRequest="150" HeightRequest="150"
+                       StrokeShape="RoundRectangle 80">
+                    
 
                     <Image Source="{Binding AccountDetails.ProfilePictureUri}" 
                            Aspect="AspectFill" 
-                           HorizontalOptions="Center" VerticalOptions="Center"
                            WidthRequest="150" HeightRequest="150"/>
-                </Frame>
+                </Border>
 
                 <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
                     <Label Text="{Binding AccountDetails.FirstName}"

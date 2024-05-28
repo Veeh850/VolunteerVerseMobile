@@ -11,6 +11,7 @@ namespace VolunteerVerseMobile
             Routing.RegisterRoute(nameof(EventListPage), typeof(EventListPage));
             Routing.RegisterRoute(nameof(EventDetailsPage), typeof(EventDetailsPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(SignupPage), typeof(SignupPage));
             Routing.RegisterRoute(nameof(OrganizationListPage), typeof(OrganizationListPage));
             Routing.RegisterRoute(nameof(OrganizationDetailsPage), typeof(OrganizationDetailsPage));
             Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));

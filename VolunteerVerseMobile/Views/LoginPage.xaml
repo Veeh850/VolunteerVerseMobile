@@ -22,7 +22,8 @@
              StrokeThickness="2"
              BackgroundColor="{StaticResource Gray600}"
              Padding="10"
-            StrokeShape="RoundRectangle 30">
+             StrokeShape="RoundRectangle 30, 30, 0, 0"
+             VerticalOptions="FillAndExpand">
             
             <StackLayout>
                 <material:TextField 
@@ -49,7 +50,7 @@
                 <FlexLayout JustifyContent="SpaceEvenly">
                     <Button StyleClass="TextButton" Text="Continue without Login" Command="{Binding ContinueWithoutLoginCommand}"/>
                     <Label Text="or"  VerticalOptions="Center"/>
-                    <Button StyleClass="TextButton" Text="Sign up" Command="{Binding }"/>
+                    <Button StyleClass="TextButton" Text="Sign up" Command="{Binding GoToSignupPageCommand}" />
                 </FlexLayout>
                
             </StackLayout>

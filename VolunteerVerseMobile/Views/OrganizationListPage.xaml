@@ -21,19 +21,26 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:OrganizationPreview">
                                 <Grid Padding="10">
-                                    <Frame HeightRequest="125">
-                                        <Frame.GestureRecognizers>
+                                    <Border HeightRequest="125" 
+                                         Stroke="{StaticResource Gray600}"
+                                         StrokeThickness="2"
+                                         BackgroundColor="{StaticResource Gray600}"
+                                         StrokeShape="RoundRectangle 15">
+                                        <Border.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrganizationListViewModel}}, Path=GoToDetailsCommand}" 
                                                            CommandParameter="{Binding Id}"/>
-                                        </Frame.GestureRecognizers>
+                                        </Border.GestureRecognizers>
                                         <Grid Padding="0" ColumnDefinitions="125,*">
-                                            <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
-                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
+                                            <Border StrokeShape="RoundRectangle 15">
+                                              <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>  
+                                            </Border>
+
+                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="30,10,0,0">
                                                 <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18"/>
                                             </VerticalStackLayout>
                                         </Grid>
 
-                                    </Frame>
+                                    </Border>
                                 </Grid>
 
                             </DataTemplate>

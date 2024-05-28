@@ -14,6 +14,11 @@
         ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage"/>
 
+    <ShellContent
+        Title="Sigup"
+        ContentTemplate="{DataTemplate views:SignupPage}"
+        Route="SignupPage"/>
+
 
     <TabBar Route="main">
         <Tab Title="Events" Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Event}}">

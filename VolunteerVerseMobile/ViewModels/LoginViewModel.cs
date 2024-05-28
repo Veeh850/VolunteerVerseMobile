@@ -116,9 +116,6 @@ namespace VolunteerVerseMobile.ViewModels
             await Shell.Current.GoToAsync("SignupPage");
         }
 
-
-
-
         public override Task OnAppearing()
         {
             return Task.CompletedTask;

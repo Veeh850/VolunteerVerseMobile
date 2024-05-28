@@ -20,7 +20,7 @@
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:OrganizationPreview">
-                                <Grid Padding="10">
+                                <Grid Padding="10,0,10,0">
                                     <Border HeightRequest="125" 
                                          Stroke="{StaticResource Gray600}"
                                          StrokeThickness="2"

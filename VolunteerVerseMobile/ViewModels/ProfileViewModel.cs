@@ -106,6 +106,18 @@ namespace VolunteerVerseMobile.ViewModels
             await Shell.Current.GoToAsync(nameof(LoginPage));
         }
 
+        [RelayCommand]
+        public async Task Logout()
+        {
+            AccountContext.Email = string.Empty;
+            AccountContext.PictureUri = string.Empty;
+            AccountContext.FirstName = string.Empty;
+            AccountContext.LastName = string.Empty;
+            AccountContext.Token = string.Empty;
+
+            await Shell.Current.GoToAsync("//LoginPage", true);
+        }
+
         public override async Task OnAppearing()
         {
             if(string.IsNullOrEmpty(AccountContext.Token))

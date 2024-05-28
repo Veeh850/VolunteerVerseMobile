@@ -10,39 +10,37 @@
              Appearing="OrganizationListPage_Appearing">
     <ScrollView>
         <VerticalStackLayout>
-            <RefreshView>
-                <ContentView>
-                    <CollectionView ItemsSource="{Binding OrganizationPreviews}" SelectionMode="None">
+            <ContentView>
+                <CollectionView ItemsSource="{Binding OrganizationPreviews}" SelectionMode="None">
 
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                        </CollectionView.ItemsLayout>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="model:OrganizationPreview">
-                                <Grid Padding="10">
-                                    <Frame HeightRequest="125">
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrganizationListViewModel}}, Path=GoToDetailsCommand}" 
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:OrganizationPreview">
+                            <Grid Padding="10">
+                                <Frame HeightRequest="125">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrganizationListViewModel}}, Path=GoToDetailsCommand}" 
                                                            CommandParameter="{Binding Id}"/>
-                                        </Frame.GestureRecognizers>
-                                        <Grid Padding="0" ColumnDefinitions="125,*">
-                                            <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
-                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
-                                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18"/>
-                                            </VerticalStackLayout>
-                                        </Grid>
+                                    </Frame.GestureRecognizers>
+                                    <Grid Padding="0" ColumnDefinitions="125,*">
+                                        <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
+                                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
 
-                                    </Frame>
-                                </Grid>
+                                </Frame>
+                            </Grid>
 
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
 
 
-                    </CollectionView>
-                </ContentView>
-            </RefreshView>
+                </CollectionView>
+            </ContentView>
 
         </VerticalStackLayout>
     </ScrollView>

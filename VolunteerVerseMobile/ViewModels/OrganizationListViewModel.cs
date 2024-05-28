@@ -55,10 +55,10 @@ namespace VolunteerVerseMobile.ViewModels
                     OrganizationPreviews.Add(item);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                Debug.WriteLine("Error");
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

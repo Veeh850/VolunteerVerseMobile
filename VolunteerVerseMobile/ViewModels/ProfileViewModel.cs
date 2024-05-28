@@ -45,7 +45,7 @@ namespace VolunteerVerseMobile.ViewModels
             }
             catch (Exception ex)
             {
-                var x = ex.Message;
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK"); ;
             }
             finally
             {
@@ -79,8 +79,7 @@ namespace VolunteerVerseMobile.ViewModels
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error",
-                        ex.Message, "OK");
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {

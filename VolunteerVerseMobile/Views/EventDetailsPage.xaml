@@ -39,14 +39,12 @@
 
                     <VerticalStackLayout Padding="2">
                         <HorizontalStackLayout>
-                            <Border StrokeShape="RoundRectangle 15">
-                                <Image WidthRequest="24" HeightRequest="24">
-                                    <Image.Source>
-                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Schedule}"/>
-                                    </Image.Source>
-                                </Image>
-                            </Border>
 
+                            <Image WidthRequest="24" HeightRequest="24">
+                                <Image.Source>
+                                    <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Schedule}"/>
+                                </Image.Source>
+                            </Image>
 
                             <Label Text="{Binding EventDetails.StartTime, StringFormat='Start: {0:yyyy.MM.dd HH:mm}'}" Padding="10,0,0,0"/>
                         </HorizontalStackLayout>

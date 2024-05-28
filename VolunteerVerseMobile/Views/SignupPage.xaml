@@ -6,7 +6,8 @@
              xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
              x:DataType="viewmodel:SignupViewModel"
              x:Class="VolunteerVerseMobile.Views.SignupPage"
-             Title="SignupPage">
+             Title="Signup"
+             Shell.TabBarIsVisible="False">
     <!--<ScrollView>-->
         <VerticalStackLayout VerticalOptions="FillAndExpand" >
             <HorizontalStackLayout HorizontalOptions="Center" Padding="15">

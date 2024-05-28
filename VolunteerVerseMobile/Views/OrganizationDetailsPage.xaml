@@ -7,7 +7,7 @@
              x:DataType="viewmodel:OrganizationDetailsViewModel"
              xmlns:converters="clr-namespace:VolunteerVerseMobile.Utils.Converters"
              xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
-             Title="OrganizationDetailsPage"
+             Title="Organization Details"
              Appearing="OrganizationDetailsPage_Appearing">
 
     <ContentPage.Resources>
@@ -23,7 +23,7 @@
                 </Border>
               
 
-                <Label Text="{Binding OrganizationDetails.Name}" HorizontalTextAlignment="Center" FontSize="Medium" Padding="15"/>
+                <Label Text="{Binding OrganizationDetails.Name}" HorizontalTextAlignment="Center" FontSize="20" Padding="15"/>
 
                 <HorizontalStackLayout Margin="0,0,0,10">
                     <Image WidthRequest="16" HeightRequest="16">
@@ -48,7 +48,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Label Text="Events" FontSize="Medium"/>
+                <Label Text="Events" FontSize="20" Padding="0,0,0,10"/>
 
 
                 <ContentView>
@@ -85,7 +85,7 @@
                 </ContentView>
 
                 <FlexLayout JustifyContent="SpaceBetween" Margin="0, 30,0,0" >
-                    <Label Text="Members" FontSize="Medium" />
+                    <Label Text="Members" FontSize="20" />
                     <ImageButton  WidthRequest="100" Command="{Binding AddMemberButtonClickedCommand}" x:Name="addMemberButton">
                         <ImageButton.Source>
                             <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Add}"/>
@@ -133,8 +133,8 @@
               
                 </ContentView>
 
-                <HorizontalStackLayout HorizontalOptions="Center">
-                    <Button StyleClass="FilledTonalButton" Text="Delete" Margin="5" x:Name="deleteOrgButton"
+                <HorizontalStackLayout HorizontalOptions="Center" Padding="0,20,0,0">
+                    <Button StyleClass="FilledTonalButton" Text="Delete" Margin="5" x:Name="deleteOrgButton" BackgroundColor="Red" TextColor="White"
                             Command="{Binding DeleteButtonClickedCommand}"/>
 
                     <Button StyleClass="FilledButton" Text="Leave" Margin="5" x:Name="leaveOrgButton"

@@ -12,12 +12,12 @@
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="LoginPage"/>
+        Route="Login"/>
 
     <ShellContent
         Title="Sigup"
         ContentTemplate="{DataTemplate views:SignupPage}"
-        Route="SignupPage"/>
+        Route="Signup"/>
 
 
     <TabBar Route="main">

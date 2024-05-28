@@ -41,8 +41,6 @@
                         <DataTemplate x:DataType="model:EventPreview">
                             <Grid Padding="15,0,10,0">
                                 <Border HeightRequest="125" 
-                                         Stroke="{StaticResource Gray600}"
-                                         StrokeThickness="2"
                                          BackgroundColor="{StaticResource Gray600}"
                                          StrokeShape="RoundRectangle 15">
                                     <Border.GestureRecognizers>

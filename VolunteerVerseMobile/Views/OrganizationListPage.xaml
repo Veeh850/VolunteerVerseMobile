@@ -21,8 +21,6 @@
                             <DataTemplate x:DataType="model:OrganizationPreview">
                                 <Grid Padding="10,0,10,0">
                                     <Border HeightRequest="125" 
-                                         Stroke="{StaticResource Gray600}"
-                                         StrokeThickness="2"
                                          BackgroundColor="{StaticResource Gray600}"
                                          StrokeShape="RoundRectangle 15">
                                         <Border.GestureRecognizers>
@@ -34,8 +32,8 @@
                                               <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>  
                                             </Border>
 
-                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="30,10,0,0">
-                                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18"/>
+                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10,10,0,0">
+                                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18" LineBreakMode="WordWrap"/>
                                             </VerticalStackLayout>
                                         </Grid>
 

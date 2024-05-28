@@ -1,38 +1,40 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using VolunteerVerseMobile.Interfaces;
 using VolunteerVerseMobile.Models;
 using VolunteerVerseMobile.Utils;
-using VolunteerVerseMobile.Views;
 
 namespace VolunteerVerseMobile.ViewModels
 {
-    public partial class LoginViewModel : BaseViewModel
+    public partial class SignupViewModel : BaseViewModel
     {
         [ObservableProperty]
-        private string _emailAddress;
-
-        [ObservableProperty]
-        private string _password;
-
-        [ObservableProperty]
-        private string _error;
+        private SignupDTO signupModel = new SignupDTO();
 
         private readonly IAuthorizationApiService _authorizationApiService;
 
         private readonly IConnectivity _connectivity;
 
+        [ObservableProperty]
+        private string _error;
 
-        public LoginViewModel(IAuthorizationApiService authorizationApiService, IConnectivity connectivity)
+        [ObservableProperty]
+        private string _confirmPassword;
+
+        public SignupViewModel(IAuthorizationApiService authorizationApiService, IConnectivity connectivity)
         {
             _authorizationApiService = authorizationApiService;
-
             _connectivity = connectivity;
+
         }
 
         [RelayCommand]
-        public async Task Login()
+        public async Task Signup()
         {
             if (_connectivity.NetworkAccess != NetworkAccess.Internet)
             {
@@ -40,14 +42,17 @@ namespace VolunteerVerseMobile.ViewModels
                     $"Please check internet and try again.", "OK");
 
                 return;
-
             }
 
-
-            if (string.IsNullOrWhiteSpace(EmailAddress) || string.IsNullOrWhiteSpace(Password))
+            if (string.IsNullOrEmpty(SignupModel.FirstName) || string.IsNullOrEmpty(SignupModel.LastName) || 
+                string.IsNullOrEmpty(SignupModel.Email) || string.IsNullOrEmpty(SignupModel.Phone) || 
+                string.IsNullOrEmpty(SignupModel.Password) || string.IsNullOrEmpty(ConfirmPassword) ||
+                SignupModel.Password != ConfirmPassword)
             {
                 return;
             }
+
+
 
             Error = string.Empty;
 
@@ -60,7 +65,7 @@ namespace VolunteerVerseMobile.ViewModels
             {
                 IsBusy = true;
 
-                LoginResponseDTO result = await _authorizationApiService.LoginAsync(EmailAddress, Password);
+                LoginResponseDTO result = await _authorizationApiService.SignupAsync(SignupModel);
 
                 AccountContext.Email = result.Email;
                 AccountContext.PictureUri = result.ProfilePictureUri;
@@ -71,7 +76,6 @@ namespace VolunteerVerseMobile.ViewModels
                 await Shell.Current.GoToAsync("//main/EventListPage", true);
 
                 await Shell.Current.Navigation.PopToRootAsync();
-
             }
             catch (Exception ex)
             {
@@ -82,39 +86,8 @@ namespace VolunteerVerseMobile.ViewModels
             {
                 IsBusy = false;
             }
-
-
         }
 
-        [RelayCommand]
-        public async Task ContinueWithoutLogin()
-        {
-            if (_connectivity.NetworkAccess != NetworkAccess.Internet)
-            {
-                await Shell.Current.DisplayAlert("No connectivity!",
-                    $"Please check internet and try again.", "OK");
-
-                return;
-
-            }
-
-            AccountContext.Email = string.Empty;
-            AccountContext.PictureUri = string.Empty;
-            AccountContext.FirstName = string.Empty;
-            AccountContext.LastName = string.Empty;
-            AccountContext.Token = string.Empty;
-
-            //await Shell.Current.GoToAsync($"{nameof(EventListPage)}", true);
-            await Shell.Current.GoToAsync("//main/EventListPage", true);
-
-            await Shell.Current.Navigation.PopToRootAsync();
-        }
-
-        [RelayCommand]
-        public async Task GoToSignupPage()
-        {
-            await Shell.Current.GoToAsync("SignupPage");
-        }
 
         public override Task OnAppearing()
         {

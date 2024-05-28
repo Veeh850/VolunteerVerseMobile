@@ -10,5 +10,9 @@ namespace VolunteerVerseMobile.Interfaces
     public interface IAuthorizationApiService
     {
         public Task<LoginResponseDTO> LoginAsync(string emailAddress, string password);
+
+        public Task<LoginResponseDTO> SignupAsync(SignupDTO signumModel);
+
+        
     }
 }

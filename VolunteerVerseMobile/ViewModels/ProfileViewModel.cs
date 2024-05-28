@@ -108,6 +108,7 @@ namespace VolunteerVerseMobile.ViewModels
         [RelayCommand]
         public async Task Logout()
         {
+
             bool confirm = await Shell.Current.DisplayAlert("Confirm", "Are you sure you want to logout?", "Yes", "No");
 
             if(confirm == false)

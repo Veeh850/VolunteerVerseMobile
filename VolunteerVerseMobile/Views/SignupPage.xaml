@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel ="clr-namespace:VolunteerVerseMobile.ViewModels"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             x:DataType="viewmodel:SignupViewModel"
+             x:Class="VolunteerVerseMobile.Views.SignupPage"
+             Title="SignupPage">
+    <!--<ScrollView>-->
+        <VerticalStackLayout VerticalOptions="FillAndExpand" >
+            <HorizontalStackLayout HorizontalOptions="Center" Padding="15">
+                <Image WidthRequest="32" HeightRequest="32">
+                    <Image.Source>
+                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Person_add}"/>
+                    </Image.Source>
+                </Image>
+                <Label 
+                     Text="Create account"
+                     VerticalOptions="Center" 
+                     HorizontalOptions="Center" 
+                     VerticalTextAlignment="End"
+                     FontSize="Title"
+                     Padding="10,10,0,10"/>
+
+            </HorizontalStackLayout>
+
+            <Border
+                 Stroke="{StaticResource Gray600}"
+                 Padding="10"
+                 StrokeShape="RoundRectangle 30, 30, 0, 0"
+                 BackgroundColor="{StaticResource Gray600}"
+                 VerticalOptions="EndAndExpand">
+
+                <VerticalStackLayout Spacing="10" Margin="0,40,0, 200">
+
+                    <material:TextField x:Name="FirstNameEntry"  Title="First name" 
+                                        Text="{Binding SignupModel.FirstName}"
+                                        Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Person}}"/>
+                    <material:TextField x:Name="LastNameEntry" Title="Last name" 
+                                        Text="{Binding SignupModel.LastName}"
+                                        Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Person}}"/>
+                    <material:TextField x:Name="EmailEntry" Title="Email address" 
+                                        Text="{Binding SignupModel.Email}"
+                                        Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Email}}"/>
+                    <material:TextField x:Name="PhoneEntry" Title="Phone number" Keyboard="Numeric" 
+                                        Text="{Binding SignupModel.Phone}"
+                                        Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Call}}"/>
+                    <material:TextField x:Name="PasswordEntry" Title="Password" 
+                                        Text="{Binding SignupModel.Password}" IsPassword="True"
+                                        Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Password}}">
+                                            <material:TextField.Attachments>
+                                                <material:TextFieldPasswordShowHideAttachment />
+                                            </material:TextField.Attachments>   
+                </material:TextField>
+                    <material:TextField x:Name="ConfirmPasswordEntry" Title="Confirm password" 
+                                        Text="{Binding ConfirmPassword}" IsPassword="True"
+                                        Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Password}}">
+                                            <material:TextField.Attachments>
+                                                <material:TextFieldPasswordShowHideAttachment />
+                                            </material:TextField.Attachments>   
+                </material:TextField>
+
+                <Button StyleClass="FilledButton" Text="Sign Up"  Margin="0,40,0,20"
+                            Command="{Binding SignupCommand}" />
+
+                    <Label Text="{Binding Error}" TextColor="Red" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+            </Border>
+
+        </VerticalStackLayout>
+    <!--</ScrollView>-->
+</ContentPage>

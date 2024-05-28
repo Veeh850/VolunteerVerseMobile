@@ -38,6 +38,7 @@ namespace VolunteerVerseMobile
             builder.Services.AddTransient<ProfileViewModel>();
             builder.Services.AddTransient<OrganizationListViewModel>();
             builder.Services.AddTransient<OrganizationDetailsViewModel>();
+            builder.Services.AddTransient<SignupViewModel>();
 
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<EventListPage>();
@@ -45,6 +46,7 @@ namespace VolunteerVerseMobile
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<OrganizationListPage>();
             builder.Services.AddTransient<OrganizationDetailsPage>();
+            builder.Services.AddTransient<SignupPage>();
 
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
 

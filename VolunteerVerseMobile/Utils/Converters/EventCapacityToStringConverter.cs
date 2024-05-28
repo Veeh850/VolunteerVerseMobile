@@ -19,8 +19,8 @@ namespace VolunteerVerseMobile.Utils.Converters
                 return null;
             }
 
-            return $"Capacity: {eventDetails.Applied}/{eventDetails.Manpower}";
-        }
+            return $"{eventDetails.Applied} / {eventDetails.Manpower}";
+        } 
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {

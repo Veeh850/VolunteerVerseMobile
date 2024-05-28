@@ -38,5 +38,24 @@ namespace VolunteerVerseMobile.Services
 
             return await response.Content.ReadFromJsonAsync<LoginResponseDTO>();
         }
+
+        public async Task<LoginResponseDTO> SignupAsync(SignupDTO signupModel)
+        {
+            var response = await _httpClient.PostAsync(Constants.SignupUrl, ApiUtils.GenerateBody<SignupDTO>(signupModel));
+
+            if (response.IsSuccessStatusCode == false)
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponseDTO>();
+
+                if (errorResponse != null && errorResponse.Errors.Count != 0)
+                {
+                    throw new Exception(errorResponse.Errors[0]);
+                }
+            }
+
+            return await response.Content.ReadFromJsonAsync<LoginResponseDTO>();
+        }
+
+        
     }
 }

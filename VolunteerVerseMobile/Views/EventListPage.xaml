@@ -14,7 +14,7 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            <Grid Padding="10">
+            <Grid Padding="5,5,5,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -22,9 +22,9 @@
 
                 <SearchBar Text="{Binding Searchtext}" SearchCommand="{Binding SearchBarCommand}" Grid.Column="0" Margin="0,0,10,0"/>
 
-                <ImageButton Clicked="ShowBottomSheet" WidthRequest="100" HorizontalOptions="End" Grid.Column="1">
+                <ImageButton Clicked="ShowBottomSheet" WidthRequest="32" HeightRequest="32" HorizontalOptions="End" Grid.Column="1">
                     <ImageButton.Source>
-                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Filter_alt}"/>
+                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Tune}"/>
                     </ImageButton.Source>
 
                 </ImageButton>
@@ -39,24 +39,43 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:EventPreview">
-                            <Grid Padding="10">
+                            <Grid Padding="15,0,10,0">
                                 <Border HeightRequest="125" 
                                          Stroke="{StaticResource Gray600}"
                                          StrokeThickness="2"
                                          BackgroundColor="{StaticResource Gray600}"
-                                         Padding="10"
-                                         StrokeShape="RoundRectangle 30">
+                                         StrokeShape="RoundRectangle 15">
                                     <Border.GestureRecognizers>
 
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EventListViewModel}}, Path=GoToDetailsCommand}" 
                                                               CommandParameter="{Binding Id}"/>
                                     </Border.GestureRecognizers>
                                     <Grid Padding="0" ColumnDefinitions="125,*">
-                                        <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
-                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
-                                            <Label Text="{Binding Name}" />
-                                            <Label Text="{Binding StartTime, StringFormat='{0:d}'}" />
+                                        <Border StrokeShape="RoundRectangle 15">
+                                             <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
+                                        </Border>
+                                       
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="20,10,0,0">
+                                            <Label Text="{Binding Name}" FontSize="18" Padding="0,0,0,8" LineBreakMode="WordWrap"/>
+                                            <HorizontalStackLayout>
+                                                <Image WidthRequest="16" HeightRequest="16">
+                                                    <Image.Source>
+                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Corporate_fare}"/>
+                                                    </Image.Source>
+                                                </Image>
+                                                <Label Text="{Binding Organization.Name}" Padding="5" LineBreakMode="WordWrap" FontSize="14"/>
+                                            </HorizontalStackLayout>
 
+                                            <HorizontalStackLayout>
+                                                <Image WidthRequest="16" HeightRequest="16">
+                                                    <Image.Source>
+                                                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Schedule}"/>
+                                                    </Image.Source>
+                                                </Image>
+                                                <HorizontalStackLayout>
+                                                    <Label Text="{Binding StartTime, StringFormat='{0:d}'}" Padding="5" LineBreakMode="WordWrap"/>
+                                                </HorizontalStackLayout>
+                                            </HorizontalStackLayout>
                                         </VerticalStackLayout>
                                     </Grid>
 
@@ -82,7 +101,7 @@
                 <material:TextField Title="Organization" Text="{Binding EventFilter.OrganizationName}" Margin="0,0,0,10"/>
                 <material:TextField Title="Location" Text="{Binding EventFilter.Location}" Margin="0,0,0,10"/>
 
-                <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10" Margin="0,0,0,10">
+                <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10" Margin="0,0,0,40">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />

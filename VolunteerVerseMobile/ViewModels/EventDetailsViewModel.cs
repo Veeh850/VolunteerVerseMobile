@@ -48,8 +48,9 @@ namespace VolunteerVerseMobile.ViewModels
 
                 EventDetails = await _eventApiService.GetEventDetailsById(EventId);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
@@ -58,9 +59,12 @@ namespace VolunteerVerseMobile.ViewModels
         }
 
         [RelayCommand]
-        public Task GoToOrganizationDetailsPage()
+        public async Task GoToOrganizationDetailsPage()
         {
-            throw new NotImplementedException();
+            await Shell.Current.GoToAsync(nameof(OrganizationDetailsPage), true, new Dictionary<string, object>
+            {
+                {"organizationId" , EventDetails.Organization.Id}
+            });
         }
 
         [RelayCommand]
@@ -99,8 +103,9 @@ namespace VolunteerVerseMobile.ViewModels
                 EventDetails = await _eventApiService.GetEventDetailsById(EventId);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
@@ -145,8 +150,7 @@ namespace VolunteerVerseMobile.ViewModels
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error",
-                        ex.Message, "OK");
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
 
             }
             finally

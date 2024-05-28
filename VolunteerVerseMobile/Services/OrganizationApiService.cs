@@ -74,6 +74,15 @@ namespace VolunteerVerseMobile.Services
 
         public async Task LeaveOrganization(int orgId)
         {
+            if (string.IsNullOrEmpty(AccountContext.Token) == false)
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccountContext.Token);
+            }
+            else
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = null;
+            }
+
             var response = await _httpClient.DeleteAsync($"{Constants.OrganizationUrl}/{orgId}/account");
 
             if (response.IsSuccessStatusCode == false)
@@ -89,6 +98,15 @@ namespace VolunteerVerseMobile.Services
 
         public async Task DeleteOrganization(int orgId)
         {
+            if (string.IsNullOrEmpty(AccountContext.Token) == false)
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccountContext.Token);
+            }
+            else
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = null;
+            }
+
             var response = await _httpClient.DeleteAsync($"{Constants.OrganizationUrl}/{orgId}");
 
             if (response.IsSuccessStatusCode == false)
@@ -104,7 +122,16 @@ namespace VolunteerVerseMobile.Services
 
         public async Task AddOrganizationMember(int orgId, string email)
         {
-            var response = await _httpClient.PostAsync($"{Constants.OrganizationUrl}/{orgId}/account", new StringContent(""));
+            if (string.IsNullOrEmpty(AccountContext.Token) == false)
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccountContext.Token);
+            }
+            else
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = null;
+            }
+
+            var response = await _httpClient.PostAsync($"{Constants.OrganizationUrl}/{orgId}/account", ApiUtils.GenerateBody<AddOrgMemberDTO>(new AddOrgMemberDTO { Email = email}));
 
             if (response.IsSuccessStatusCode == false)
             {

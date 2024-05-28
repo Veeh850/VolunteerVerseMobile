@@ -6,17 +6,16 @@
              xmlns:viewmodel="clr-namespace:VolunteerVerseMobile.ViewModels"
              x:DataType="viewmodel:OrganizationListViewModel"
              xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
-             Title="OrganizationListPage"
+             Title="Organizations"
              Appearing="OrganizationListPage_Appearing">
     <ScrollView>
         <VerticalStackLayout>
-            <RefreshView>
-                <ContentView>
-                    <CollectionView ItemsSource="{Binding OrganizationPreviews}" SelectionMode="None">
+            <ContentView>
+                <CollectionView ItemsSource="{Binding OrganizationPreviews}" SelectionMode="None">
 
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                        </CollectionView.ItemsLayout>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:OrganizationPreview">
@@ -43,13 +42,12 @@
                                     </Border>
                                 </Grid>
 
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
 
 
-                    </CollectionView>
-                </ContentView>
-            </RefreshView>
+                </CollectionView>
+            </ContentView>
 
         </VerticalStackLayout>
     </ScrollView>

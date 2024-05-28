@@ -45,7 +45,7 @@ namespace VolunteerVerseMobile.ViewModels
             }
             catch (Exception ex)
             {
-                var x = ex.Message;
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK"); ;
             }
             finally
             {
@@ -79,8 +79,7 @@ namespace VolunteerVerseMobile.ViewModels
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error",
-                        ex.Message, "OK");
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
             {
@@ -109,13 +108,21 @@ namespace VolunteerVerseMobile.ViewModels
         [RelayCommand]
         public async Task Logout()
         {
+
+            bool confirm = await Shell.Current.DisplayAlert("Confirm", "Are you sure you want to logout?", "Yes", "No");
+
+            if(confirm == false)
+            {
+                return;
+            }
+
             AccountContext.Email = string.Empty;
             AccountContext.PictureUri = string.Empty;
             AccountContext.FirstName = string.Empty;
             AccountContext.LastName = string.Empty;
             AccountContext.Token = string.Empty;
 
-            await Shell.Current.GoToAsync("//LoginPage", true);
+            await GoToLogin();
         }
 
         public override async Task OnAppearing()

@@ -8,7 +8,7 @@
              xmlns:model="clr-namespace:VolunteerVerseMobile.Models"
              xmlns:viewmodel ="clr-namespace:VolunteerVerseMobile.ViewModels"
              x:DataType="viewmodel:ProfileViewModel"
-             Title="ProfilePage"
+             Title="Profile"
              Appearing="ProfilePage_Appearing">
     <ScrollView>
 
@@ -25,7 +25,6 @@
             </StackLayout>
 
             <StackLayout x:Name="ProfileSection">
-
 
                 <Border 
                        HorizontalOptions="Center" VerticalOptions="Center"

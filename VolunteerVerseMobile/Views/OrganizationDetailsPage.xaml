@@ -22,6 +22,7 @@
                            WidthRequest="150" HeightRequest="150"/>
                 </Border>
               
+
                 <Label Text="{Binding OrganizationDetails.Name}" HorizontalTextAlignment="Center" FontSize="Medium" Padding="15"/>
 
                 <HorizontalStackLayout Margin="0,0,0,10">
@@ -85,7 +86,7 @@
 
                 <FlexLayout JustifyContent="SpaceBetween" Margin="0, 30,0,0" >
                     <Label Text="Members" FontSize="Medium" />
-                    <ImageButton  WidthRequest="100">
+                    <ImageButton  WidthRequest="100" Command="{Binding AddMemberButtonClickedCommand}" x:Name="addMemberButton">
                         <ImageButton.Source>
                             <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Add}"/>
                         </ImageButton.Source>
@@ -129,21 +130,18 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+              
                 </ContentView>
 
                 <HorizontalStackLayout HorizontalOptions="Center">
-                    <Button StyleClass="FilledTonalButton" Text="Delete" Margin="5" IsVisible="{Binding OrganizationDetails.RoleInOrganization,
-                            Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter=3}"
+                    <Button StyleClass="FilledTonalButton" Text="Delete" Margin="5" x:Name="deleteOrgButton"
                             Command="{Binding DeleteButtonClickedCommand}"/>
-                    
-                    <Button StyleClass="FilledButton" Text="Leave" Margin="5" IsVisible="{Binding OrganizationDetails.RoleInOrganization, 
-                            Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter=0}"
+
+                    <Button StyleClass="FilledButton" Text="Leave" Margin="5" x:Name="leaveOrgButton"
                             Command="{Binding LeaveButtonClickedCommand}"/>
                 </HorizontalStackLayout>
 
-                
+
             </VerticalStackLayout>
         </ScrollView>
-
-
 </ContentPage>

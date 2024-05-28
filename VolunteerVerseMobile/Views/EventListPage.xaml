@@ -111,7 +111,6 @@
                     <material:DatePickerField Title="End Date" Date="{Binding EventFilter.EndDate}" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
                 </Grid>
 
-
                 <FlexLayout JustifyContent="Center" Wrap="Wrap">
                     <Button StyleClass="OutlinedButton" Text="Reset" WidthRequest="100" Command="{Binding ResetEventFilterCommand}" Margin="0,0,5,0"/>
                     <Button StyleClass="FilledButton" Text="Search"  WidthRequest="100" Clicked="SearchBy_Filter"/>

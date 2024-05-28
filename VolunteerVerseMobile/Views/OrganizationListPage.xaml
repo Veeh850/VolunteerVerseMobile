@@ -6,7 +6,7 @@
              xmlns:viewmodel="clr-namespace:VolunteerVerseMobile.ViewModels"
              x:DataType="viewmodel:OrganizationListViewModel"
              xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
-             Title="OrganizationListPage"
+             Title="Organizations"
              Appearing="OrganizationListPage_Appearing">
     <ScrollView>
         <VerticalStackLayout>

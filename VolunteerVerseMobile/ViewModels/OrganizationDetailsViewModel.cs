@@ -31,6 +31,7 @@ namespace VolunteerVerseMobile.ViewModels
         public OrganizationDetailsViewModel(IOrganizationApiService organizationApiService)
         {
             OrganizationDetails = new OrganizationDetails();
+
             _organizationApiService = organizationApiService;
         }
 
@@ -58,7 +59,7 @@ namespace VolunteerVerseMobile.ViewModels
         [RelayCommand]
         public async Task LeaveButtonClicked()
         {
-            bool confirm = await Application.Current.MainPage.DisplayAlert("Confirm", "Are you sure you want to leave this organization?", "Yes", "No");
+            bool confirm = await Shell.Current.DisplayAlert("Confirm", "Are you sure you want to leave this organization?", "Yes", "No");
             
             if (confirm)
             {
@@ -104,8 +105,6 @@ namespace VolunteerVerseMobile.ViewModels
                     IsBusy = true;
                     await _organizationApiService.DeleteOrganization(OrganizationId);
 
-                    OrganizationDetails = await _organizationApiService.GetOrganizationDetailsById(OrganizationId);
-
                     await Shell.Current.GoToAsync("..");
                 }
                 catch (Exception ex)
@@ -134,12 +133,11 @@ namespace VolunteerVerseMobile.ViewModels
         [RelayCommand]
         public async Task AddMemberButtonClicked()
         {
+            string email = await Shell.Current.DisplayPromptAsync("Add Member", "Enter email address:");
 
-            string email = await Application.Current.MainPage.DisplayPromptAsync("Add Member", "Enter email address:");
 
             if (string.IsNullOrWhiteSpace(email))
             {
-                // Handle invalid email address
                 return;
             }
             if (IsBusy)
@@ -150,12 +148,15 @@ namespace VolunteerVerseMobile.ViewModels
             try
             {
                 IsBusy = true;
+
                 await _organizationApiService.AddOrganizationMember(OrganizationId, email);
-                await LoadOrganizationDetails();
+
+                OrganizationDetails = await _organizationApiService.GetOrganizationDetailsById(OrganizationId);
             }
             catch (Exception ex)
             {
-
+                await Shell.Current.DisplayAlert("Error",
+                      ex.Message, "OK");
             }
             finally
             {

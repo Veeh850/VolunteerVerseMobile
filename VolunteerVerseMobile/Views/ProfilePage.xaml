@@ -8,7 +8,7 @@
              xmlns:model="clr-namespace:VolunteerVerseMobile.Models"
              xmlns:viewmodel ="clr-namespace:VolunteerVerseMobile.ViewModels"
              x:DataType="viewmodel:ProfileViewModel"
-             Title="ProfilePage"
+             Title="Profile"
              Appearing="ProfilePage_Appearing">
     <ScrollView>
 
@@ -26,6 +26,13 @@
 
             <StackLayout x:Name="ProfileSection">
 
+
+                <ImageButton  WidthRequest="100" ToolTipProperties.Text="Logout" HorizontalOptions="End" Command="{Binding LogoutCommand}" Margin="-24,10">
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static m:MaterialRegular.Logout}"/>
+                    </ImageButton.Source>
+
+                </ImageButton>
 
                 <Frame CornerRadius="100" 
                        HorizontalOptions="Center" VerticalOptions="Center"

@@ -15,8 +15,6 @@ namespace VolunteerVerseMobile.Services
             _httpClient = new HttpClient();
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccountContext.Token);
-
-            //_httpClient.BaseAddress = new Uri(Constants.BaseUrl);
         }
 
         public async Task<List<EventPreview>> GetAllEventPreviews(EventFilter? eventFilter = null)

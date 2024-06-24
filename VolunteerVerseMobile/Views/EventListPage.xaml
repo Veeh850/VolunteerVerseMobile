@@ -115,10 +115,6 @@
                 </FlexLayout>
 
             </VerticalStackLayout>
-
-
         </material:BottomSheetView>
     </uranium:UraniumContentPage.Attachments>
-
-
 </uranium:UraniumContentPage>

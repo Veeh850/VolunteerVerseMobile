@@ -8,8 +8,6 @@ namespace VolunteerVerseMobile.Utils
 {
     public static class Constants
     {
-        //public const string BaseUrl = "https://localhost:7192/api";
-
         public const string BaseUrl = "https://volunteerverse.azurewebsites.net/api/";
 
         public readonly static string EventUrl = $"{BaseUrl}/events";

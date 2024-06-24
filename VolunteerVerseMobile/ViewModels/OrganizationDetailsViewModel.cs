@@ -62,8 +62,6 @@ namespace VolunteerVerseMobile.ViewModels
                     return;
                 }
 
-                //Ellenorizni
-
                 try
                 {
                     IsBusy = true;

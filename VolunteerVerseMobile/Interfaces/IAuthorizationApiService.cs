@@ -12,7 +12,5 @@ namespace VolunteerVerseMobile.Interfaces
         public Task<LoginResponseDTO> LoginAsync(string emailAddress, string password);
 
         public Task<LoginResponseDTO> SignupAsync(SignupDTO signumModel);
-
-        
     }
 }

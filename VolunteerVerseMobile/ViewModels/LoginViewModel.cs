@@ -104,9 +104,7 @@ namespace VolunteerVerseMobile.ViewModels
             AccountContext.LastName = string.Empty;
             AccountContext.Token = string.Empty;
 
-            //await Shell.Current.GoToAsync($"{nameof(EventListPage)}", true);
             await Shell.Current.GoToAsync("//main/EventListPage", true);
-
             await Shell.Current.Navigation.PopToRootAsync();
         }
 

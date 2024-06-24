@@ -17,36 +17,32 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                     </CollectionView.ItemsLayout>
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="model:OrganizationPreview">
-                                <Grid Padding="10,0,10,0">
-                                    <Border HeightRequest="125" 
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:OrganizationPreview">
+                            <Grid Padding="10,0,10,0">
+                                <Border HeightRequest="125" 
                                          BackgroundColor="{StaticResource Gray600}"
                                          StrokeShape="RoundRectangle 15">
-                                        <Border.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrganizationListViewModel}}, Path=GoToDetailsCommand}" 
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrganizationListViewModel}}, Path=GoToDetailsCommand}" 
                                                            CommandParameter="{Binding Id}"/>
-                                        </Border.GestureRecognizers>
-                                        <Grid Padding="0" ColumnDefinitions="125,*">
-                                            <Border StrokeShape="RoundRectangle 15">
-                                              <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>  
-                                            </Border>
+                                    </Border.GestureRecognizers>
+                                    <Grid Padding="0" ColumnDefinitions="125,*">
+                                        <Border StrokeShape="RoundRectangle 15">
+                                            <Image Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="125" HeightRequest="125"/>
+                                        </Border>
 
-                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10,10,0,0">
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10,10,0,0">
                                             <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18" LineBreakMode="WordWrap"/>
-                                            </VerticalStackLayout>
-                                        </Grid>
+                                        </VerticalStackLayout>
+                                    </Grid>
 
-                                    </Border>
-                                </Grid>
-
+                                </Border>
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-
-
                 </CollectionView>
             </ContentView>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

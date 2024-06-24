@@ -11,14 +11,12 @@
              Title="Profile"
              Appearing="ProfilePage_Appearing">
     <ScrollView>
-
         <StackLayout>
-
             <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="40" Padding="15,0,15,0" Margin="0,180" x:Name="LoginSection">
 
                 <Label Text="You are not logged in. Please log in to access your profile."
                     FontSize="18"
-                    HorizontalTextAlignment="Center" />  
+                    HorizontalTextAlignment="Center" />
 
                 <Button Text="Log in" StyleClass="FilledButton" WidthRequest="120" Command="{Binding GoToLoginCommand}" />
 
@@ -31,7 +29,7 @@
                        Margin="0, 20, 0, 0"
                        WidthRequest="150" HeightRequest="150"
                        StrokeShape="RoundRectangle 80">
-                    
+
 
                     <Image Source="{Binding AccountDetails.ProfilePictureUri}" 
                            Aspect="AspectFill" 
@@ -69,10 +67,10 @@
                 </HorizontalStackLayout>
 
                 <BoxView StyleClass="Divider" />
-             
+
                 <Button HorizontalOptions="Center" StyleClass="FilledButton" Text="Logout" BackgroundColor="Red" TextColor="White"
                         Command="{Binding LogoutCommand}"/>
-              
+
 
                 <BoxView StyleClass="Divider" />
 
@@ -101,7 +99,7 @@
                                                     <Border StrokeShape="RoundRectangle 15">
                                                         <Image Grid.Column="0" Aspect="AspectFill" Source="{Binding ImageUri}" WidthRequest="120" HeightRequest="200"/>
                                                     </Border>
-                                                    
+
 
                                                     <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Padding="10">
                                                         <Label Text="{Binding Name}" FontSize="18" LineBreakMode="WordWrap" Padding="0,0,0,10"/>
@@ -113,7 +111,7 @@
                                                             </Image>
                                                             <Label Text="{Binding Organization.Name}" Padding="5" LineBreakMode="WordWrap" FontSize="14"/>
                                                         </HorizontalStackLayout>
-                                                      
+
                                                         <HorizontalStackLayout>
                                                             <Image WidthRequest="16" HeightRequest="16">
                                                                 <Image.Source>
@@ -145,18 +143,11 @@
 
                                     </uranium:ExpanderView>
                                 </Grid>
-
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-
                     </CollectionView>
                 </ContentView>
-
-
             </StackLayout>
-
         </StackLayout>
-
     </ScrollView>
-
 </ContentPage>

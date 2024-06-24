@@ -206,16 +206,12 @@
 
                                         </CollectionView>
                                     </VerticalStackLayout>
-
-
                                 </uranium:ExpanderView>
                             </VerticalStackLayout>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-
             </CollectionView>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
